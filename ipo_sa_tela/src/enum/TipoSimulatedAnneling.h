@@ -1,0 +1,8 @@
+#ifndef TIPOSIMULATEDANNELING_H
+#define TIPOSIMULATEDANNELING_H
+
+enum TipoSimulatedAnneling{
+    ALOCACAO_SALAS = 0
+};
+
+#endif // TIPOSIMULATEDANNELING_H
