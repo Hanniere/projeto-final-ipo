@@ -1,0 +1,6 @@
+Usamos:
+Factory
+Template Method
+Teste unitario utilizando assert para nao amarrar ao Qt
+
+Alocacao de vector para tamnho especifico afim de evitar array copy -> std::vector<T> vetorT = std::vector<T>( tamanhoVetor );
