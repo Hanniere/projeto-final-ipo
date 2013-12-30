@@ -10,13 +10,18 @@ SimulatedAnnelingFactory::SimulatedAnnelingFactory()
 
 ISimulatedAnneling *SimulatedAnnelingFactory::getSimulatedAnneling(const TipoSimulatedAnneling &tipo) const
 {
+    ISimulatedAnneling* retorno;
+
     switch( tipo ){
         case ALOCACAO_SALAS:
-            return new SimulatedAnnelingAlocacaoSala();
+            retorno = new SimulatedAnnelingAlocacaoSala();
         break;
+
+        default:
+            retorno = 0;
     }
 
-    return 0;
+    return retorno;
 }
 
 ISimulatedAnnelingFactory *SimulatedAnnelingFactory::getInstance()
