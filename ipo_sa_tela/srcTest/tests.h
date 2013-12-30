@@ -6,6 +6,7 @@
 #include <srcTest/sa/alocacaoSala/SimulatedAnnelingAlocacaoSalaTest.h>
 #include <srcTest/domain/functor/DemandaTurmaFunctorTest.h>
 #include <srcTest/domain/functor/CapacidadeSalaFunctorTest.h>
+#include <srcTest/util/MathUtilTest.h>
 
 void mainTestes(){
     // ParserSimulatedAnnelingAlocacaoSalaArquivoTest
@@ -28,6 +29,9 @@ void mainTestes(){
     // CapacidadeSalaFunctorTest
     ordenaCapacidadeCrescenteOK();
     ordenaCapacidadeDecrescenteOK();
+
+    // MathUtilTest
+    expZero();
 }
 
 #endif // TESTS_H
