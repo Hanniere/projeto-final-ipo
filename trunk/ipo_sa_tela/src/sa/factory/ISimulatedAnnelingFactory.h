@@ -9,6 +9,8 @@ class ISimulatedAnnelingFactory
 {
 public:
     ISimulatedAnnelingFactory();
+    virtual ~ISimulatedAnnelingFactory();
+
     virtual ISimulatedAnneling* getSimulatedAnneling( const TipoSimulatedAnneling& tipo ) const = 0;
 };
 

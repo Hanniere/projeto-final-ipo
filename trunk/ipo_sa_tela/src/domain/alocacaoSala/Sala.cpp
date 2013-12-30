@@ -5,6 +5,10 @@ Sala::Sala()
 {
 }
 
+Sala::~Sala()
+{
+}
+
 std::vector<Turma> Sala::listaTurma() const
 {
     return m_listaTurma;

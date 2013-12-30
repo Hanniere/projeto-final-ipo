@@ -7,6 +7,8 @@ class ISolucaoSa
 {
 public:
     ISolucaoSa();
+    virtual ~ISolucaoSa();
+
     virtual std::string toString() = 0;
 
     int funcaoObjAtual() const;
@@ -17,6 +19,17 @@ public:
 
     int qtdeSalaVirtual() const;
     void setQtdeSalaVirtual(int qtdeSalaVirtual);
+
+// metodos virtuais
+public:
+    // resulta em uma solucao inicial usando GRASP
+    virtual void geraSolucaoInicial() = 0;
+    // retorna sizeof da classe Solucao em questao
+    virtual int tamanhoSolucaoSa() const = 0;
+    // gera vizinho a partir da solucao atual
+    virtual ISolucaoSa* gerarVizinho() const = 0;
+    // copia os dados de uma solucao para outra
+    virtual void copia( const ISolucaoSa& solucao ) = 0;
 
 protected:
     // funcao obj atual

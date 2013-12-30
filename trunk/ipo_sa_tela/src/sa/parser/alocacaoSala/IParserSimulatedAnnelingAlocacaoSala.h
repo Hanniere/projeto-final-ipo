@@ -10,6 +10,7 @@ class IParserSimulatedAnnelingAlocacaoSala : public IParserSimulatedAnneling
 {
 public:
     IParserSimulatedAnnelingAlocacaoSala();
+    virtual ~IParserSimulatedAnnelingAlocacaoSala();
 
     std::vector<Sala> vetorSala() const;
     void setVetorSala(const std::vector<Sala> &vetorSala);

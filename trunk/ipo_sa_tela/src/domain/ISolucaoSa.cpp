@@ -5,6 +5,10 @@ ISolucaoSa::ISolucaoSa()
 {
 }
 
+ISolucaoSa::~ISolucaoSa()
+{
+}
+
 int ISolucaoSa::qtdeSalaVirtual() const
 {
     return m_qtdeSalaVirtual;

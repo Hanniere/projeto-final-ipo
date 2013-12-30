@@ -15,9 +15,4 @@ void testeAlocacaoSolucaoOK(){
     assert( solucao->listaSala().size() == 0 );
 }
 
-void testeTamanhoSolucaoOK(){
-    SimulatedAnnelingAlocacaoSala sa;
-    assert( sa.tamanhoSolucaoSa() == sizeof( SolucaoSaAlocacaoSala ) );
-}
-
 #endif // SIMULATEDANNELINGALOCACAOSALATEST_H

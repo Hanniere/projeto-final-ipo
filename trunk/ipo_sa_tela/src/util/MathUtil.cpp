@@ -9,6 +9,10 @@ MathUtil::MathUtil()
 {
 }
 
+MathUtil::~MathUtil()
+{
+}
+
 void MathUtil::seed()
 {
     srand(time(0));

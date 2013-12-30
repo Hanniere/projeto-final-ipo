@@ -17,6 +17,8 @@ class ParserSimulatedAnnelingAlocacaoSalaArquivo : public IParserSimulatedAnneli
 {
 public:
     ParserSimulatedAnnelingAlocacaoSalaArquivo();
+    virtual ~ParserSimulatedAnnelingAlocacaoSalaArquivo();
+
     bool parse( const std::string& entrada );
     void clear();
 

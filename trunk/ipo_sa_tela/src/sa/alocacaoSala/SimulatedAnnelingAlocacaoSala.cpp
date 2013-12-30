@@ -20,6 +20,10 @@ SimulatedAnnelingAlocacaoSala::SimulatedAnnelingAlocacaoSala(const std::vector<S
     m_vetorTurma = vetorTurma;
 }
 
+SimulatedAnnelingAlocacaoSala::~SimulatedAnnelingAlocacaoSala()
+{
+}
+
 bool SimulatedAnnelingAlocacaoSala::carregarDadosEntrada(const std::string &nomeArquivo)
 {
     if( m_parser->parse( nomeArquivo ) ){
@@ -37,23 +41,7 @@ bool SimulatedAnnelingAlocacaoSala::carregarDadosEntrada(const std::string &nome
     return false;
 }
 
-ISolucaoSa *SimulatedAnnelingAlocacaoSala::geraSolucaoInicial()
-{
-    assert( 0 );
-    //return 0;
-}
-
 ISolucaoSa *SimulatedAnnelingAlocacaoSala::alocaSolucao() const
 {
     return new SolucaoSaAlocacaoSala();
-}
-
-int SimulatedAnnelingAlocacaoSala::tamanhoSolucaoSa() const
-{
-    return sizeof(SolucaoSaAlocacaoSala);
-}
-
-void SimulatedAnnelingAlocacaoSala::gerarVizinho(ISolucaoSa *vizinho, const ISolucaoSa *atual) const
-{
-    assert( 0 );
 }

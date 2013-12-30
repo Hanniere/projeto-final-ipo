@@ -3,3 +3,7 @@
 ISimulatedAnnelingFactory::ISimulatedAnnelingFactory()
 {
 }
+
+ISimulatedAnnelingFactory::~ISimulatedAnnelingFactory()
+{
+}

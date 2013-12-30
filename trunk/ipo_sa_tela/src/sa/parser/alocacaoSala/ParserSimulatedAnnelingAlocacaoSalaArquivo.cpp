@@ -6,6 +6,10 @@ ParserSimulatedAnnelingAlocacaoSalaArquivo::ParserSimulatedAnnelingAlocacaoSalaA
 {
 }
 
+ParserSimulatedAnnelingAlocacaoSalaArquivo::~ParserSimulatedAnnelingAlocacaoSalaArquivo()
+{
+}
+
 
 bool ParserSimulatedAnnelingAlocacaoSalaArquivo::parse(const std::string &entrada)
 {

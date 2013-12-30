@@ -4,6 +4,10 @@ IParserSimulatedAnnelingAlocacaoSala::IParserSimulatedAnnelingAlocacaoSala()
 {
 }
 
+IParserSimulatedAnnelingAlocacaoSala::~IParserSimulatedAnnelingAlocacaoSala()
+{
+}
+
 std::vector<Sala> IParserSimulatedAnnelingAlocacaoSala::vetorSala() const
 {
     return m_vetorSala;
