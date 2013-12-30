@@ -1,7 +1,7 @@
 #ifndef SIMULATEDANNELINGALOCACAOSALA_H
 #define SIMULATEDANNELINGALOCACAOSALA_H
 
-#include <sa/ISimulatedAnneling.h>
+#include <src/sa/ISimulatedAnneling.h>
 
 class SimulatedAnnelingAlocacaoSala : public ISimulatedAnneling
 {
