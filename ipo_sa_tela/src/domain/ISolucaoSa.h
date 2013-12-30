@@ -1,13 +1,13 @@
-#ifndef SOLUCAOSA_H
-#define SOLUCAOSA_H
+#ifndef ISOLUCAOSA_H
+#define ISOLUCAOSA_H
 
-#include <vector>
-#include <src/domain/alocacaoSala/Sala.h>
+#include <string>
 
-class SolucaoSa
+class ISolucaoSa
 {
 public:
-    SolucaoSa();
+    ISolucaoSa();
+    virtual std::string toString() = 0;
 
     int funcaoObjAtual() const;
     void setFuncaoObjAtual(int funcaoObjAtual);
@@ -18,10 +18,7 @@ public:
     int qtdeSalaVirtual() const;
     void setQtdeSalaVirtual(int qtdeSalaVirtual);
 
-    std::vector<Sala> listaSala() const;
-    void setListaSala(const std::vector<Sala> &listaSala);
-
-private:
+protected:
     // funcao obj atual
     int m_funcaoObjAtual;
 
@@ -37,9 +34,6 @@ private:
      *  40                      50                  virtual
      */
     int m_qtdeSalaVirtual;
-
-    // Lista de salas com suas respectivas turmas
-    std::vector<Sala> m_listaSala;
 };
 
-#endif // SOLUCAOSA_H
+#endif // ISOLUCAOSA_H

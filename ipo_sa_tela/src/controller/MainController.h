@@ -3,7 +3,6 @@
 
 #include <string>
 
-class ISimulatedAnnelingFactory;
 class ISimulatedAnneling;
 
 class MainController

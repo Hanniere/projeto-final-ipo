@@ -16,7 +16,6 @@ SOURCES += main.cpp\
         MainWindow.cpp \
     src/domain/alocacaoSala/Turma.cpp \
     src/domain/alocacaoSala/Sala.cpp \
-    src/domain/SolucaoSa.cpp \
     src/controller/MainController.cpp \
     src/sa/ISimulatedAnneling.cpp \
     src/sa/alocacaoSala/SimulatedAnnelingAlocacaoSala.cpp \
@@ -24,13 +23,15 @@ SOURCES += main.cpp\
     src/sa/factory/SimulatedAnnelingFactory.cpp \
     src/sa/parser/IParserSimulatedAnneling.cpp \
     src/sa/parser/alocacaoSala/IParserSimulatedAnnelingAlocacaoSala.cpp \
-    src/sa/parser/alocacaoSala/ParserSimulatedAnnelingAlocacaoSalaArquivo.cpp
+    src/sa/parser/alocacaoSala/ParserSimulatedAnnelingAlocacaoSalaArquivo.cpp \
+    src/domain/ISolucaoSa.cpp \
+    src/domain/alocacaoSala/SolucaoSaAlocacaoSala.cpp \
+    src/util/MathUtil.cpp
 
 HEADERS  += MainWindow.h \
     src/domain/alocacaoSala/Turma.h \
     src/enum/DiaSemana.h \
     src/domain/alocacaoSala/Sala.h \
-    src/domain/SolucaoSa.h \
     src/controller/MainController.h \
     src/sa/ISimulatedAnneling.h \
     src/sa/alocacaoSala/SimulatedAnnelingAlocacaoSala.h \
@@ -43,6 +44,14 @@ HEADERS  += MainWindow.h \
     srcTest/tests.h \
     srcTest/sa/parser/alocacaoSala/ParserSimulatedAnnelingAlocacaoSalaArquivoTest.h \
     srcTest/sa/factory/SimulatedAnnelingFactoryTest.h \
-    srcTest/sa/factory/SimulatedAnnelingFactoryTest.h
+    srcTest/sa/factory/SimulatedAnnelingFactoryTest.h \
+    src/domain/ISolucaoSa.h \
+    src/domain/alocacaoSala/SolucaoSaAlocacaoSala.h \
+    src/util/MathUtil.h \
+    srcTest/sa/alocacaoSala/SimulatedAnnelingAlocacaoSalaTest.h \
+    src/domain/functor/CapacidadeSalaFunctor.h \
+    src/domain/functor/DemandaTurmaFunctor.h \
+    srcTest/domain/functor/DemandaTurmaFunctorTest.h \
+    srcTest/domain/functor/CapacidadeSalaFunctorTest.h
 
 FORMS    += MainWindow.ui

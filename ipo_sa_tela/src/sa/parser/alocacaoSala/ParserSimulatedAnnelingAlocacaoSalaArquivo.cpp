@@ -56,3 +56,9 @@ bool ParserSimulatedAnnelingAlocacaoSalaArquivo::parse(const std::string &entrad
     else
         return false;
 }
+
+void ParserSimulatedAnnelingAlocacaoSalaArquivo::clear()
+{
+    m_vetorSala.clear();
+    m_vetorTurma.clear();
+}
