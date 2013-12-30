@@ -1,7 +1,7 @@
 #ifndef ISIMULATEDANNELINGFACTORY_H
 #define ISIMULATEDANNELINGFACTORY_H
 
-#include <enum/TipoSimulatedAnneling.h>
+#include <src/enum/TipoSimulatedAnneling.h>
 
 class ISimulatedAnneling;
 

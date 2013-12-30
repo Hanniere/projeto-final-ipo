@@ -2,7 +2,7 @@
 #define SALA_H
 
 #include <vector>
-#include <domain/alocacaoSala/Turma.h>
+#include <src/domain/alocacaoSala/Turma.h>
 
 class Sala
 {

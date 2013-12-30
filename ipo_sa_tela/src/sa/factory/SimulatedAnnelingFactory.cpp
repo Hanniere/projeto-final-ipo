@@ -1,6 +1,8 @@
 #include "SimulatedAnnelingFactory.h"
 
-#include <sa/SimulatedAnnelingAlocacaoSala.h>
+#include <src/sa/alocacaoSala/SimulatedAnnelingAlocacaoSala.h>
+
+SimulatedAnnelingFactory* SimulatedAnnelingFactory::sa = 0;
 
 SimulatedAnnelingFactory::SimulatedAnnelingFactory()
 {
@@ -15,4 +17,12 @@ ISimulatedAnneling *SimulatedAnnelingFactory::getSimulatedAnneling(const TipoSim
     }
 
     return 0;
+}
+
+ISimulatedAnnelingFactory *SimulatedAnnelingFactory::getInstance()
+{
+    if( sa == 0 )
+        sa = new SimulatedAnnelingFactory();
+
+    return sa;
 }

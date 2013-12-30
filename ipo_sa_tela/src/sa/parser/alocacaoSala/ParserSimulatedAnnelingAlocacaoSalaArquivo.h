@@ -1,7 +1,7 @@
 #ifndef PARSERSIMULATEDANNELINGALOCACAOSALA_H
 #define PARSERSIMULATEDANNELINGALOCACAOSALA_H
 
-#include <sa/parser/alocacaoSala/IParserSimulatedAnnelingAlocacaoSala.h>
+#include <src/sa/parser/alocacaoSala/IParserSimulatedAnnelingAlocacaoSala.h>
 
 /*
  *Entrada:

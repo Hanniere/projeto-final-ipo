@@ -1,7 +1,7 @@
 #ifndef TURMA_H
 #define TURMA_H
 
-#include <enum/DiaSemana.h>
+#include <src/enum/DiaSemana.h>
 
 class Turma
 {

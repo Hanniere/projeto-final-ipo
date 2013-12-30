@@ -3,7 +3,7 @@
 
 #include <fstream>
 #include <cassert>
-#include <sa/parser/alocacaoSala/ParserSimulatedAnnelingAlocacaoSalaArquivo.h>
+#include <src/sa/parser/alocacaoSala/ParserSimulatedAnnelingAlocacaoSalaArquivo.h>
 
 void parseDadosEntradaArquivoTxtOk(){
     std::ofstream arquivoSaida("temp.txt", std::ios_base::out );

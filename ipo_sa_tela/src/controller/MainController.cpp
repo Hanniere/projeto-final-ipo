@@ -2,12 +2,11 @@
 
 #include<string>
 #include <algorithm>
-#include<sa/SimulatedAnnelingAlocacaoSala.h>
-#include<sa/factory/SimulatedAnnelingFactory.h>
+#include<src/sa/alocacaoSala/SimulatedAnnelingAlocacaoSala.h>
+#include<src/sa/factory/SimulatedAnnelingFactory.h>
 
 MainController::MainController()
 {
-    m_simulatedAnnelingFactory = new SimulatedAnnelingFactory();
     // simulalted anneling default
     m_simulatedAnneling = new SimulatedAnnelingAlocacaoSala();
 }
@@ -26,5 +25,5 @@ void MainController::setTipoSimulatedAnneling(std::string tipoSa)
 {
     std::transform(tipoSa.begin(), tipoSa.end(), tipoSa.begin(), ::tolower);
     if( tipoSa == "alocacao sala")
-        m_simulatedAnneling =  m_simulatedAnnelingFactory->getSimulatedAnneling( ALOCACAO_SALAS );
+        m_simulatedAnneling =  SimulatedAnnelingFactory::getInstance()->getSimulatedAnneling( ALOCACAO_SALAS );
 }

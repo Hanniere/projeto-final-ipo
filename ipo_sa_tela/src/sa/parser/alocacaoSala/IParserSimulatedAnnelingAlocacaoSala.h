@@ -1,9 +1,9 @@
 #ifndef IPARSERSIMULATEDANNELINGALOCACAOSALA_H
 #define IPARSERSIMULATEDANNELINGALOCACAOSALA_H
 
-#include <sa/parser/IParserSimulatedAnneling.h>
-#include <domain/alocacaoSala/Sala.h>
-#include <domain/alocacaoSala/Turma.h>
+#include <src/sa/parser/IParserSimulatedAnneling.h>
+#include <src/domain/alocacaoSala/Sala.h>
+#include <src/domain/alocacaoSala/Turma.h>
 #include <vector>
 
 class IParserSimulatedAnnelingAlocacaoSala : public IParserSimulatedAnneling
