@@ -16,7 +16,6 @@ public:
 
 private:
     ISimulatedAnneling* m_simulatedAnneling;
-    ISimulatedAnnelingFactory* m_simulatedAnnelingFactory;
 };
 
 #endif // MAINCONTROLLER_H

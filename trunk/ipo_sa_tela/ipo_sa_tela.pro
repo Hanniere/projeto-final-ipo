@@ -42,6 +42,7 @@ HEADERS  += MainWindow.h \
     src/sa/parser/alocacaoSala/ParserSimulatedAnnelingAlocacaoSalaArquivo.h \
     srcTest/tests.h \
     srcTest/sa/parser/alocacaoSala/ParserSimulatedAnnelingAlocacaoSalaArquivoTest.h \
+    srcTest/sa/factory/SimulatedAnnelingFactoryTest.h \
     srcTest/sa/factory/SimulatedAnnelingFactoryTest.h
 
 FORMS    += MainWindow.ui

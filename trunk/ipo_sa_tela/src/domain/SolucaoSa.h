@@ -2,7 +2,7 @@
 #define SOLUCAOSA_H
 
 #include <vector>
-#include <domain/alocacaoSala/Sala.h>
+#include <src/domain/alocacaoSala/Sala.h>
 
 class SolucaoSa
 {
