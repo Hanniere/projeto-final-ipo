@@ -20,7 +20,6 @@ void mainTestes(){
 
     // SimulatedAnnelingAlocacaoSalaTest
     testeAlocacaoSolucaoOK();
-    testeTamanhoSolucaoOK();
 
     // DemandaTurmaFunctorTest
     ordenaDemandaCrescenteOK();

@@ -3,3 +3,7 @@
 IParserSimulatedAnneling::IParserSimulatedAnneling()
 {
 }
+
+IParserSimulatedAnneling::~IParserSimulatedAnneling()
+{
+}

@@ -17,13 +17,12 @@ public:
 
     SimulatedAnnelingAlocacaoSala();
     SimulatedAnnelingAlocacaoSala( const std::vector<Sala>& vetorSala, const std::vector<Turma>& vetorTurma );
+    virtual ~SimulatedAnnelingAlocacaoSala();
+
     bool carregarDadosEntrada( const std::string& nomeArquivo );
 
 public:
-    ISolucaoSa* geraSolucaoInicial();
     ISolucaoSa* alocaSolucao() const;
-    int tamanhoSolucaoSa() const;
-    void gerarVizinho( ISolucaoSa* vizinho, const ISolucaoSa* atual ) const;
 
 private:
     IParserSimulatedAnnelingAlocacaoSala* m_parser;

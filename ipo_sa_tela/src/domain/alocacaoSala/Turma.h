@@ -7,6 +7,7 @@ class Turma
 {
 public:
     Turma();
+    virtual ~Turma();
 
     int codigoTruma() const;
     void setCodigoTruma(int codigoTruma);

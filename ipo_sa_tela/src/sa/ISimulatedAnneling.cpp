@@ -8,13 +8,18 @@ ISimulatedAnneling::ISimulatedAnneling()
 {
 }
 
+ISimulatedAnneling::~ISimulatedAnneling()
+{
+}
+
 ISolucaoSa *ISimulatedAnneling::simulatedAnneling()
 {
-    ISolucaoSa* solucaoAtual = geraSolucaoInicial();
-    ISolucaoSa* melhorSolucao = 0;
+    ISolucaoSa* solucaoAtual = alocaSolucao();
+    ISolucaoSa* melhorSolucao = alocaSolucao();
     ISolucaoSa* vizinho = 0;
 
-    copiaSolucaoSa( melhorSolucao, solucaoAtual );
+    solucaoAtual->geraSolucaoInicial();
+    melhorSolucao->copia( *solucaoAtual );
 
     int numeroIteracoesAtual = 0;
     float temperatura = m_temperaturaInicial;
@@ -23,21 +28,27 @@ ISolucaoSa *ISimulatedAnneling::simulatedAnneling()
         while( numeroIteracoesAtual < m_numeroIteracoes ){
             numeroIteracoesAtual++;
 
-            gerarVizinho( vizinho, solucaoAtual );
+            vizinho = solucaoAtual->gerarVizinho();
+
             int delta =  vizinho->funcaoObjAtual() -
                     solucaoAtual->funcaoObjAtual();
 
             if( delta < 0 ){
-                copiaSolucaoSa( solucaoAtual, vizinho );
+                solucaoAtual->copia( *vizinho );
+
+                // desaloca vizinho
+                delete vizinho;
+
                 if( solucaoAtual->funcaoObjAtual() <
                         melhorSolucao->funcaoObjAtual() ){
-                    copiaSolucaoSa( melhorSolucao, solucaoAtual );
+
+                    melhorSolucao->copia( *solucaoAtual );
                 }
             }
             else {//if( ){
                 double x = MathUtil::randomEntre0e1();
                 if( x < MathUtil::potenciaBaseNeperianda( -delta/temperatura ) )
-                   copiaSolucaoSa( solucaoAtual, vizinho );
+                   solucaoAtual->copia( *vizinho );
             }
         }
 
@@ -46,14 +57,6 @@ ISolucaoSa *ISimulatedAnneling::simulatedAnneling()
     }
 
     return melhorSolucao;
-}
-
-void ISimulatedAnneling::copiaSolucaoSa(ISolucaoSa *dest, const ISolucaoSa *origem) const
-{
-    if( dest == 0 )
-        dest = alocaSolucao();
-
-    memcpy( dest, origem, tamanhoSolucaoSa() );
 }
 
 int ISimulatedAnneling::numeroIteracoes() const

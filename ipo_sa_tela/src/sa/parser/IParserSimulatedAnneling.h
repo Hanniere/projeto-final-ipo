@@ -7,6 +7,7 @@ class IParserSimulatedAnneling
 {
 public:
     IParserSimulatedAnneling();
+    virtual ~IParserSimulatedAnneling();
 
     virtual bool parse( const std::string& entrada ) = 0;
     virtual void clear() = 0;

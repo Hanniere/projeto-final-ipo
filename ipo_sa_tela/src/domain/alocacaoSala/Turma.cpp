@@ -5,6 +5,10 @@ Turma::Turma()
 {
 }
 
+Turma::~Turma()
+{
+}
+
 int Turma::horario() const
 {
     return m_horario;

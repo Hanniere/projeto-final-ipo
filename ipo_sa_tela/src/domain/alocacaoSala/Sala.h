@@ -8,6 +8,7 @@ class Sala
 {
 public:
     Sala();
+    virtual ~Sala();
 
     int codigoSala() const;
     void setCodigoSala(int codigoSala);
