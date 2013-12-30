@@ -1,5 +1,5 @@
 Usamos:
-Factory
+Factory + Singleton
 Template Method
 Teste unitario utilizando assert para nao amarrar ao Qt
 

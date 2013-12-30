@@ -19,7 +19,7 @@ SOURCES += main.cpp\
     src/domain/SolucaoSa.cpp \
     src/controller/MainController.cpp \
     src/sa/ISimulatedAnneling.cpp \
-    src/sa/SimulatedAnnelingAlocacaoSala.cpp \
+    src/sa/alocacaoSala/SimulatedAnnelingAlocacaoSala.cpp \
     src/sa/factory/ISimulatedAnnelingFactory.cpp \
     src/sa/factory/SimulatedAnnelingFactory.cpp \
     src/sa/parser/IParserSimulatedAnneling.cpp \
@@ -33,7 +33,7 @@ HEADERS  += MainWindow.h \
     src/domain/SolucaoSa.h \
     src/controller/MainController.h \
     src/sa/ISimulatedAnneling.h \
-    src/sa/SimulatedAnnelingAlocacaoSala.h \
+    src/sa/alocacaoSala/SimulatedAnnelingAlocacaoSala.h \
     src/enum/TipoSimulatedAnneling.h \
     src/sa/factory/ISimulatedAnnelingFactory.h \
     src/sa/factory/SimulatedAnnelingFactory.h \
@@ -41,6 +41,7 @@ HEADERS  += MainWindow.h \
     src/sa/parser/alocacaoSala/IParserSimulatedAnnelingAlocacaoSala.h \
     src/sa/parser/alocacaoSala/ParserSimulatedAnnelingAlocacaoSalaArquivo.h \
     srcTest/tests.h \
-    srcTest/sa/parser/alocacaoSala/ParserSimulatedAnnelingAlocacaoSalaArquivoTest.h
+    srcTest/sa/parser/alocacaoSala/ParserSimulatedAnnelingAlocacaoSalaArquivoTest.h \
+    srcTest/sa/factory/SimulatedAnnelingFactoryTest.h
 
 FORMS    += MainWindow.ui
