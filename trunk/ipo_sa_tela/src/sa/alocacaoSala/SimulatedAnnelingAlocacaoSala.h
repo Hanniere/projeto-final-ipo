@@ -4,6 +4,7 @@
 #include <src/sa/ISimulatedAnneling.h>
 #include <src/domain/alocacaoSala/Sala.h>
 #include <src/domain/alocacaoSala/Turma.h>
+#include <src/domain/alocacaoSala/SolucaoSaAlocacaoSalaCompleta.h>
 #include <vector>
 
 class IParserSimulatedAnnelingAlocacaoSala;
@@ -21,13 +22,17 @@ public:
 
     bool carregarDadosEntrada( const std::string& nomeArquivo );
 
+// virtual
 public:
+    ISolucaoSa* gerarSolucaoInicial() const;
+    ISolucaoSa*simulatedAnneling();
     ISolucaoSa* alocaSolucao() const;
 
 private:
     IParserSimulatedAnnelingAlocacaoSala* m_parser;
     std::vector<Sala> m_vetorSala;
     std::vector<Turma> m_vetorTurma;
+    SolucaoSaAlocacaoSalaCompleta m_solucaoSaAlocacaoSalaCompleta;
 };
 
 #endif // SIMULATEDANNELINGALOCACAOSALA_H

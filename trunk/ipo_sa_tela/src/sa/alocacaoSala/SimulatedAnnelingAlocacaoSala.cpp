@@ -22,6 +22,7 @@ SimulatedAnnelingAlocacaoSala::SimulatedAnnelingAlocacaoSala(const std::vector<S
 
 SimulatedAnnelingAlocacaoSala::~SimulatedAnnelingAlocacaoSala()
 {
+    delete m_parser;
 }
 
 bool SimulatedAnnelingAlocacaoSala::carregarDadosEntrada(const std::string &nomeArquivo)
@@ -30,7 +31,13 @@ bool SimulatedAnnelingAlocacaoSala::carregarDadosEntrada(const std::string &nome
         m_vetorSala  = m_parser->vetorSala();
         m_vetorTurma = m_parser->vetorTurma();
 
+        m_solucaoSaAlocacaoSalaCompleta.setListaSala( m_vetorSala );
+        for( unsigned int i = 0; i < m_vetorTurma.size(); i++ ){
+            m_solucaoSaAlocacaoSalaCompleta.addTumarNoDia( m_vetorTurma[i], m_vetorTurma[i].diaSemanda() );
+        }
 
+        m_vetorSala.clear();
+        m_vetorTurma.clear();
         m_parser->clear();
 
         return true;
@@ -39,6 +46,21 @@ bool SimulatedAnnelingAlocacaoSala::carregarDadosEntrada(const std::string &nome
     m_parser->clear();
 
     return false;
+}
+
+ISolucaoSa *SimulatedAnnelingAlocacaoSala::gerarSolucaoInicial() const
+{
+    SolucaoSaAlocacaoSala* solucao = new SolucaoSaAlocacaoSala();
+
+    solucao->setListaSala( m_solucaoSaAlocacaoSalaCompleta.listaSala() );
+
+    return solucao;
+}
+
+ISolucaoSa *SimulatedAnnelingAlocacaoSala::simulatedAnneling()
+{
+    // varrer a SolucaoCompleta gerando um solucaoInicial para cada dia
+    return 0;
 }
 
 ISolucaoSa *SimulatedAnnelingAlocacaoSala::alocaSolucao() const
