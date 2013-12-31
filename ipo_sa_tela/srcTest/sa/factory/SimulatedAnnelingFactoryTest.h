@@ -10,6 +10,8 @@ void instanciaSimulatedAnnelingAlocacaoSalaOk(){
 
     SimulatedAnnelingAlocacaoSala* saNovo = dynamic_cast<SimulatedAnnelingAlocacaoSala*>(sa);
     assert( saNovo != 0 );
+
+    delete sa;
 }
 
 void instanciaSimulatedAnnelingNULL(){

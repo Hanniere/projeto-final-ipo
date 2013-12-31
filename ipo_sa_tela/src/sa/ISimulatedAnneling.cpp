@@ -12,13 +12,11 @@ ISimulatedAnneling::~ISimulatedAnneling()
 {
 }
 
-ISolucaoSa *ISimulatedAnneling::simulatedAnneling()
+ISolucaoSa *ISimulatedAnneling::simulatedAnneling( ISolucaoSa* solucaoAtual )
 {
-    ISolucaoSa* solucaoAtual = alocaSolucao();
     ISolucaoSa* melhorSolucao = alocaSolucao();
     ISolucaoSa* vizinho = 0;
 
-    solucaoAtual->geraSolucaoInicial();
     melhorSolucao->copia( *solucaoAtual );
 
     int numeroIteracoesAtual = 0;

@@ -13,7 +13,8 @@ public:
     virtual ~ISimulatedAnneling();
 
     virtual bool carregarDadosEntrada( const std::string& nomeArquivo ) = 0;
-    ISolucaoSa* simulatedAnneling();
+    virtual ISolucaoSa*simulatedAnneling() = 0;
+    ISolucaoSa* simulatedAnneling( ISolucaoSa* solucaoAtual );
 
     int numeroIteracoes() const;
     void setNumeroIteracoes(int numeroIteracoes);
@@ -26,6 +27,8 @@ public:
 
 public:
     virtual ISolucaoSa* alocaSolucao() const = 0;
+
+    virtual ISolucaoSa* gerarSolucaoInicial() const = 0;
 
 protected:
     // numero de iteracoes na temperatura

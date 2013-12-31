@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     src/sa/parser/alocacaoSala/ParserSimulatedAnnelingAlocacaoSalaArquivo.cpp \
     src/domain/ISolucaoSa.cpp \
     src/domain/alocacaoSala/SolucaoSaAlocacaoSala.cpp \
-    src/util/MathUtil.cpp
+    src/util/MathUtil.cpp \
+    src/domain/alocacaoSala/SolucaoSaAlocacaoSalaCompleta.cpp
 
 HEADERS  += MainWindow.h \
     src/domain/alocacaoSala/Turma.h \
@@ -53,6 +54,8 @@ HEADERS  += MainWindow.h \
     src/domain/functor/DemandaTurmaFunctor.h \
     srcTest/domain/functor/DemandaTurmaFunctorTest.h \
     srcTest/domain/functor/CapacidadeSalaFunctorTest.h \
-    srcTest/util/MathUtilTest.h
+    srcTest/util/MathUtilTest.h \
+    srcTest/domain/alocacaoSala/SolucaoSaAlocacaoSalaTest.h \
+    src/domain/alocacaoSala/SolucaoSaAlocacaoSalaCompleta.h
 
 FORMS    += MainWindow.ui
