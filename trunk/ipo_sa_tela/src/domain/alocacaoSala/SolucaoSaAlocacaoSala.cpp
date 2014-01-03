@@ -127,6 +127,53 @@ void SolucaoSaAlocacaoSala::armazenarMaiorHorarioMatriz(const std::vector<Turma>
     }
 }
 
+bool SolucaoSaAlocacaoSala::deveGerarVizinhoPelaTroca() const
+{
+    int rand = MathUtil::random();
+    if (rand & 1){
+        return true;
+    }
+
+    return false;
+}
+
+void SolucaoSaAlocacaoSala::gerarVizinhoPorTroca()
+{
+    int linhaElemento1 = MathUtil::randomLimitado( m_maiorHorarioTurmas );
+    int colunaElemento1 = MathUtil::randomLimitado( m_listaSala.size() );
+    int linhaElemento2 = MathUtil::randomLimitado( m_maiorHorarioTurmas );
+    int colunaElemento2 = MathUtil::randomLimitado( m_listaSala.size() );
+
+    int temp = m_matrizHorarioPorSala.at(linhaElemento2).at( colunaElemento2 );
+    m_matrizHorarioPorSala.at(linhaElemento2).at( colunaElemento2 ) =
+             m_matrizHorarioPorSala.at(linhaElemento1).at( colunaElemento1 );
+
+    m_matrizHorarioPorSala.at(linhaElemento1).at( colunaElemento1 ) = temp;
+}
+
+void SolucaoSaAlocacaoSala::gerarVizinhoPorRealocacao()
+{
+    int linhaElemento1 = MathUtil::randomLimitado( m_maiorHorarioTurmas );
+    int colunaElemento1 = MathUtil::randomLimitado( m_listaSala.size() );
+    int linhaElemento2, colunaElemento2;
+
+    bool realocou = false;
+    do{
+        linhaElemento2 = MathUtil::randomLimitado( m_maiorHorarioTurmas );
+        colunaElemento2 = MathUtil::randomLimitado( m_listaSala.size() );
+
+        if( m_matrizHorarioPorSala.at(linhaElemento2).at( colunaElemento2 ) == -1 ){
+            // realoca
+            m_matrizHorarioPorSala.at(linhaElemento2).at( colunaElemento2 ) =
+                    m_matrizHorarioPorSala.at(linhaElemento1).at( colunaElemento1 );
+
+            m_matrizHorarioPorSala.at(linhaElemento1).at( colunaElemento1 ) = -1;
+
+            realocou = true;
+        }
+    }while( realocou == false );
+}
+
 int SolucaoSaAlocacaoSala::tamanhoSolucaoSa() const
 {
     return sizeof( SolucaoSaAlocacaoSala );
@@ -140,16 +187,13 @@ ISolucaoSa *SolucaoSaAlocacaoSala::gerarVizinho() const
 
     if( retorno->gerarVizinhoPorSalaVirtual() == false ){
 
-        int rand = MathUtil::random();
-        int x1;
-        if (rand & 1){
-            // impar -> troca
-        } else{
-            // par realocacao
+        if( retorno->deveGerarVizinhoPelaTroca() == true ) {
+            retorno->gerarVizinhoPorTroca();
+        }
+        else{
+            retorno->gerarVizinhoPorRealocacao();
         }
     }
-    // random para ver se faz troca ou realocacao
-    assert( 0 );
 
     return retorno;
 }
