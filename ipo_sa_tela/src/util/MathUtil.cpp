@@ -4,7 +4,6 @@
 #include <limits>
 #include <cstdlib>
 #include <ctime>
-//#include <random>
 
 MathUtil::MathUtil()
 {
@@ -23,10 +22,6 @@ double MathUtil::randomEntre0e1()
 {
     seed();
     return (double)rand() / double(RAND_MAX);
-    // precisa do c++11
-//    std::default_random_engine generator;
-//    std::uniform_real_distribution<double> distribution(0.0,1.0);
-//    return distribution(generator);
 }
 
 double MathUtil::potenciaBaseNeperianda(double expoente)
