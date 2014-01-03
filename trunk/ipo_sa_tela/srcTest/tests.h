@@ -32,6 +32,7 @@ void mainTestes(){
 
     // MathUtilTest
     expZero();
+    randomMaiorZeroMenorUm();
 
     // SolucaoSaAlocacaoSalaTest
     testeGeraMatrizInicialOk();

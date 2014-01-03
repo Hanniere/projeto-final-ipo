@@ -15,11 +15,13 @@ public:
     int demanda() const;
     void setDemanda(int demanda);
 
-    DiaSemana diaSemanda() const;
-    void setDiaSemanda(const DiaSemana &diaSemanda);
+    DiaSemana diaSemana() const;
+    void setDiaSemana(const DiaSemana &diaSemana);
 
     int horario() const;
     void setHorario(int horario);
+
+    bool operator==(const Turma& outro );
 
 private:
     // codigo da turma
@@ -29,7 +31,7 @@ private:
     int m_demanda;
 
     // dia da semana da turma
-    DiaSemana m_diaSemanda;
+    DiaSemana m_diaSemana;
 
     // campo dinamico, representa horario, exemplo: 1 = 07:00, 2 = 07:50, 3 = 08:40
     int m_horario;

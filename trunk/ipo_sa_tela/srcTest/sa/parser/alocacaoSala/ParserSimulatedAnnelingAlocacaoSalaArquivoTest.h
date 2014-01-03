@@ -47,19 +47,19 @@ void parseDadosEntradaArquivoTxtOk(){
             Turma tempTurma = vetorTurma.at(0);
             assert( tempTurma.demanda() == 50 );
             assert( tempTurma.codigoTruma() == 0 );
-            assert( tempTurma.diaSemanda() == SEGUNDA_FEIRA );
+            assert( tempTurma.diaSemana() == SEGUNDA_FEIRA );
             assert( tempTurma.horario() == 1 );
 
             tempTurma = vetorTurma.at(1);
             assert( tempTurma.demanda() == 60 );
             assert( tempTurma.codigoTruma() == 1 );
-            assert( tempTurma.diaSemanda() == SEGUNDA_FEIRA );
+            assert( tempTurma.diaSemana() == SEGUNDA_FEIRA );
             assert( tempTurma.horario() == 1 );
 
             tempTurma = vetorTurma.at(2);
             assert( tempTurma.demanda() == 30 );
             assert( tempTurma.codigoTruma() == 2 );
-            assert( tempTurma.diaSemanda() == SEGUNDA_FEIRA );
+            assert( tempTurma.diaSemana() == SEGUNDA_FEIRA );
             assert( tempTurma.horario() == 2 );
         }
         else

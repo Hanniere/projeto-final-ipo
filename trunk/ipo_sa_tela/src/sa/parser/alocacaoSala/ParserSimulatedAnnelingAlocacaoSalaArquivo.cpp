@@ -48,7 +48,7 @@ bool ParserSimulatedAnnelingAlocacaoSalaArquivo::parse(const std::string &entrad
             if( diaSemana > DOMINGO || diaSemana == DIA_INVALIDO )
                 return false;
 
-            turma.setDiaSemanda( (DiaSemana)diaSemana );
+            turma.setDiaSemana( (DiaSemana)diaSemana );
             turma.setCodigoTruma( i );
             turma.setDemanda( demanda );
             turma.setHorario( horario );

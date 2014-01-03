@@ -4,6 +4,7 @@
 #include <src/domain/ISolucaoSa.h>
 #include <src/domain/alocacaoSala/Sala.h>
 #include <vector>
+#include <list>
 
 class SolucaoSaAlocacaoSala : public ISolucaoSa
 {
@@ -29,6 +30,8 @@ public:
 
     void montarMatriz(std::vector<Sala> vetorSalaAux, std::vector<Turma> vetorTurmaAux);
 
+    bool gerarVizinhoPorSalaVirtual();
+
 // metodos virtuais
 public:
     std::string toString();
@@ -48,6 +51,7 @@ public:
 private:
     std::vector<Sala> m_listaSala;
     std::vector< std::vector<int> > m_matrizHorarioPorSala;
+    std::list<Turma> m_turmasSalaVirtual;
 };
 
 #endif // SOLUCAOSAALOCACAOSALA_H
