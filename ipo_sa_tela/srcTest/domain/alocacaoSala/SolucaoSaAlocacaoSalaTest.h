@@ -182,4 +182,6 @@ void testeArmazenarMaiorHorarioMatrizOk(){
     assert( sa.maiorHorarioTurmas() == 3 );
 }
 
+
+
 #endif // SOLUCAOSAALOCACAOSALATEST_H

@@ -43,6 +43,12 @@ public:
 
     void armazenarMaiorHorarioMatriz( const std::vector<Turma>& vetor );
 
+    bool deveGerarVizinhoPelaTroca() const;
+
+    void gerarVizinhoPorTroca();
+
+    void gerarVizinhoPorRealocacao();
+
 // metodos virtuais
 public:
     std::string toString();
