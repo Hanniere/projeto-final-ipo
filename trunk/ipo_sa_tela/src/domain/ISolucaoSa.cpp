@@ -1,22 +1,12 @@
 #include "ISolucaoSa.h"
 
 ISolucaoSa::ISolucaoSa()
-    : m_funcaoObjAtual( -1 ), m_funcaoObjAnterior( -1 ), m_qtdeSalaVirtual( -1 )
+    : m_funcaoObjAtual( -1 ), m_funcaoObjAnterior( -1 )
 {
 }
 
 ISolucaoSa::~ISolucaoSa()
 {
-}
-
-int ISolucaoSa::qtdeSalaVirtual() const
-{
-    return m_qtdeSalaVirtual;
-}
-
-void ISolucaoSa::setQtdeSalaVirtual(int qtdeSalaVirtual)
-{
-    m_qtdeSalaVirtual = qtdeSalaVirtual;
 }
 
 int ISolucaoSa::funcaoObjAnterior() const
