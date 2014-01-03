@@ -2,7 +2,8 @@
 
 #include <src/domain/functor/CapacidadeSalaFunctor.h>
 #include <src/domain/functor/DemandaTurmaFunctor.h>
-#include<algorithm>
+#include <src/util/MathUtil.h>
+#include <algorithm>
 #include <cstring>
 #include <cassert>
 
@@ -82,8 +83,38 @@ void SolucaoSaAlocacaoSala::montarMatriz(std::vector<Sala> vetorSalaAux, std::ve
         }
         else{
             m_qtdeSalaVirtual++;
+            // adiciona na lista de turmas sem sala
+            m_turmasSalaVirtual.push_back( turma );
         }
     }
+}
+
+bool SolucaoSaAlocacaoSala::gerarVizinhoPorSalaVirtual()
+{
+    bool gerouVzinho = false;
+    if( qtdeSalaVirtual() > 0 ){
+
+        // adiciona turma da sala virtual a solucao
+        for( std::list<Turma>::const_iterator it = m_turmasSalaVirtual.begin(), end = m_turmasSalaVirtual.end();
+             it != end; ++it ){
+
+            int salaVazia =  getSalaVaziaComCapacidade( *it, m_listaSala );
+            if( salaVazia != -1 ) {
+                m_matrizHorarioPorSala[ (*it).horario() ][salaVazia] = (*it).codigoTruma();
+            }
+            else{
+                m_qtdeSalaVirtual--;
+                // adiciona na lista de turmas sem sala
+                m_turmasSalaVirtual.remove( *it );
+
+                gerouVzinho = true;
+
+                break;
+            }
+        }
+    }
+
+    return gerouVzinho;
 }
 
 int SolucaoSaAlocacaoSala::tamanhoSolucaoSa() const
@@ -93,8 +124,20 @@ int SolucaoSaAlocacaoSala::tamanhoSolucaoSa() const
 
 ISolucaoSa *SolucaoSaAlocacaoSala::gerarVizinho() const
 {
-    ISolucaoSa* retorno = new SolucaoSaAlocacaoSala();
+    SolucaoSaAlocacaoSala* retorno = new SolucaoSaAlocacaoSala();
 
+    memcpy( retorno, this, sizeof( SolucaoSaAlocacaoSala ) );
+
+    if( retorno->gerarVizinhoPorSalaVirtual() == false ){
+
+        int rand = MathUtil::random();
+        int x1;
+        if (rand & 1){
+            // impar -> troca
+        } else{
+            // par realocacao
+        }
+    }
     // random para ver se faz troca ou realocacao
     assert( 0 );
 

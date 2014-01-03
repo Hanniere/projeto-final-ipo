@@ -33,7 +33,7 @@ bool SimulatedAnnelingAlocacaoSala::carregarDadosEntrada(const std::string &nome
 
         m_solucaoSaAlocacaoSalaCompleta.setListaSala( m_vetorSala );
         for( unsigned int i = 0; i < m_vetorTurma.size(); i++ ){
-            m_solucaoSaAlocacaoSalaCompleta.addTumarNoDia( m_vetorTurma[i], m_vetorTurma[i].diaSemanda() );
+            m_solucaoSaAlocacaoSalaCompleta.addTumarNoDia( m_vetorTurma[i], m_vetorTurma[i].diaSemana() );
         }
 
         m_vetorSala.clear();
