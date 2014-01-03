@@ -45,6 +45,8 @@ void SolucaoSaAlocacaoSala::gerarSolucaoInicial(const std::vector<Turma> &vetorT
     gerarMatrizInicial();
 
     montarMatriz( m_listaSala, vetorTurma );
+
+    armazenarMaiorHorarioMatriz( vetorTurma );
 }
 
 int SolucaoSaAlocacaoSala::getSalaVaziaComCapacidade( const Turma& turma, const std::vector<Sala> vetorSala ) const
@@ -115,6 +117,16 @@ bool SolucaoSaAlocacaoSala::gerarVizinhoPorSalaVirtual()
     return false;
 }
 
+void SolucaoSaAlocacaoSala::armazenarMaiorHorarioMatriz(const std::vector<Turma> &vetor)
+{
+    m_maiorHorarioTurmas = -1;
+    for( unsigned int i = 0; i < vetor.size(); i++ ){
+        int temp = vetor.at(i).horario();
+        if( temp > m_maiorHorarioTurmas )
+            m_maiorHorarioTurmas = temp;
+    }
+}
+
 int SolucaoSaAlocacaoSala::tamanhoSolucaoSa() const
 {
     return sizeof( SolucaoSaAlocacaoSala );
@@ -183,4 +195,14 @@ int SolucaoSaAlocacaoSala::qtdeSalaVirtual() const
 void SolucaoSaAlocacaoSala::setQtdeSalaVirtual(int qtdeSalaVirtual)
 {
     m_qtdeSalaVirtual = qtdeSalaVirtual;
+}
+
+int SolucaoSaAlocacaoSala::maiorHorarioTurmas() const
+{
+    return m_maiorHorarioTurmas;
+}
+
+void SolucaoSaAlocacaoSala::setMaiorHorarioTurmas(int maiorHorarioTurmas)
+{
+    m_maiorHorarioTurmas = maiorHorarioTurmas;
 }
