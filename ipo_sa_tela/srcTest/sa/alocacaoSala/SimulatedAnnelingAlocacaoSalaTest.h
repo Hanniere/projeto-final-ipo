@@ -13,6 +13,8 @@ void testeAlocacaoSolucaoOK(){
     assert( solucao->funcaoObjAtual() == - 1 );
     assert( solucao->qtdeSalaVirtual() == - 1 );
     assert( solucao->listaSala().size() == 0 );
+    assert( solucao->turmasSalaVirtual().size() == 0 );
+    assert( solucao->matrizHorarioPorSala().size() == 0 );
 
     delete solucao;
 }

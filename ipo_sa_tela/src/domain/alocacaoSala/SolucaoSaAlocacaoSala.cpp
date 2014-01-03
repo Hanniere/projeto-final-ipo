@@ -8,7 +8,9 @@
 #include <cassert>
 
 SolucaoSaAlocacaoSala::SolucaoSaAlocacaoSala()
-    : m_listaSala( std::vector<Sala>() )
+    : m_qtdeSalaVirtual( -1 ), m_listaSala( std::vector<Sala>() ),
+      m_matrizHorarioPorSala( std::vector< std::vector<int> >() ),
+      m_turmasSalaVirtual( std::list<Turma>() )
 {
 }
 
@@ -91,7 +93,6 @@ void SolucaoSaAlocacaoSala::montarMatriz(std::vector<Sala> vetorSalaAux, std::ve
 
 bool SolucaoSaAlocacaoSala::gerarVizinhoPorSalaVirtual()
 {
-    bool gerouVzinho = false;
     if( qtdeSalaVirtual() > 0 ){
 
         // adiciona turma da sala virtual a solucao
@@ -101,20 +102,17 @@ bool SolucaoSaAlocacaoSala::gerarVizinhoPorSalaVirtual()
             int salaVazia =  getSalaVaziaComCapacidade( *it, m_listaSala );
             if( salaVazia != -1 ) {
                 m_matrizHorarioPorSala[ (*it).horario() ][salaVazia] = (*it).codigoTruma();
-            }
-            else{
+
                 m_qtdeSalaVirtual--;
                 // adiciona na lista de turmas sem sala
                 m_turmasSalaVirtual.remove( *it );
 
-                gerouVzinho = true;
-
-                break;
+                return true;
             }
         }
     }
 
-    return gerouVzinho;
+    return false;
 }
 
 int SolucaoSaAlocacaoSala::tamanhoSolucaoSa() const
@@ -165,4 +163,24 @@ std::vector<std::vector<int> > SolucaoSaAlocacaoSala::matrizHorarioPorSala() con
 void SolucaoSaAlocacaoSala::setMatrizHorarioPorSala(const std::vector<std::vector<int> > &matrizHorarioPorSala)
 {
     m_matrizHorarioPorSala = matrizHorarioPorSala;
+}
+
+std::list<Turma> SolucaoSaAlocacaoSala::turmasSalaVirtual() const
+{
+    return m_turmasSalaVirtual;
+}
+
+void SolucaoSaAlocacaoSala::setTurmasSalaVirtual(const std::list<Turma> &turmasSalaVirtual)
+{
+    m_turmasSalaVirtual = turmasSalaVirtual;
+}
+
+int SolucaoSaAlocacaoSala::qtdeSalaVirtual() const
+{
+    return m_qtdeSalaVirtual;
+}
+
+void SolucaoSaAlocacaoSala::setQtdeSalaVirtual(int qtdeSalaVirtual)
+{
+    m_qtdeSalaVirtual = qtdeSalaVirtual;
 }

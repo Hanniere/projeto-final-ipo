@@ -38,6 +38,7 @@ void mainTestes(){
     testeGeraMatrizInicialOk();
     testeGetSalaVaziaComCapacidadeOk();
     testeMontarMatrizOk();
+    testeGerarVizinhoSalaVirtualOk();
 }
 
 #endif // TESTS_H

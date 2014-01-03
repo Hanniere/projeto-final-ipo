@@ -14,11 +14,17 @@ public:
     SolucaoSaAlocacaoSala();
     virtual ~SolucaoSaAlocacaoSala();
 
+    int qtdeSalaVirtual() const;
+    void setQtdeSalaVirtual(int qtdeSalaVirtual);
+
     std::vector<Sala> listaSala() const;
     void setListaSala(const std::vector<Sala> &listaSala);
 
     std::vector<std::vector<int> > matrizHorarioPorSala() const;
     void setMatrizHorarioPorSala(const std::vector<std::vector<int> > &matrizHorarioPorSala);
+
+    std::list<Turma> turmasSalaVirtual() const;
+    void setTurmasSalaVirtual(const std::list<Turma> &turmasSalaVirtual);
 
     void gerarMatrizInicial();
 
@@ -49,8 +55,31 @@ public:
     void clear();
 
 private:
+
+    // salar virtuais, salas utilizadas principalmente para solucao inicial
+    /*
+     *
+     *Capacidade salas     capacidade turma     Resultado
+     *  50                      50                  Alocado
+     *  50                      50                  Alocado
+     *  40                      50                  virtual
+     */
+    int m_qtdeSalaVirtual;
+
+    // lista de salas dessa solucao
     std::vector<Sala> m_listaSala;
+
+    /*
+     *matriz horarioXsala com o codigo da turma na sala que foi alocada em determinado
+     *horario para certa turma
+     */
     std::vector< std::vector<int> > m_matrizHorarioPorSala;
+
+    /*
+     *lista de turmas que estao na sala virtual
+     *Usada na geracao de vizinho para ver se alguma turma em sala
+     *virtual pode ser alocada em alguma sala na nova solucao
+     */
     std::list<Turma> m_turmasSalaVirtual;
 };
 
