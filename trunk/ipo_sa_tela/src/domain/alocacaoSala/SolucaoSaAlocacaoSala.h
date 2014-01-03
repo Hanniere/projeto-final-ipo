@@ -26,6 +26,9 @@ public:
     std::list<Turma> turmasSalaVirtual() const;
     void setTurmasSalaVirtual(const std::list<Turma> &turmasSalaVirtual);
 
+    int maiorHorarioTurmas() const;
+    void setMaiorHorarioTurmas(int maiorHorarioTurmas);
+
     void gerarMatrizInicial();
 
     void gerarSolucaoInicial( const std::vector<Turma>& vetorTurma );
@@ -37,6 +40,8 @@ public:
     void montarMatriz(std::vector<Sala> vetorSalaAux, std::vector<Turma> vetorTurmaAux);
 
     bool gerarVizinhoPorSalaVirtual();
+
+    void armazenarMaiorHorarioMatriz( const std::vector<Turma>& vetor );
 
 // metodos virtuais
 public:
@@ -81,6 +86,12 @@ private:
      *virtual pode ser alocada em alguma sala na nova solucao
      */
     std::list<Turma> m_turmasSalaVirtual;
+
+    /*
+     *Armazena o maior horario que as turma de entrada podem atiginr
+     *utilizado para gerar o numero randomico para gerar vizinhos
+     */
+    int m_maiorHorarioTurmas;
 };
 
 #endif // SOLUCAOSAALOCACAOSALA_H

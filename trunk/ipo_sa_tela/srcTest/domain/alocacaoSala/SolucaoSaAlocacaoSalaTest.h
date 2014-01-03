@@ -159,4 +159,27 @@ void testeGerarVizinhoSalaVirtualOk(){
     assert( matrizHorarioPorSala[2][2] == -1);
 }
 
+void testeArmazenarMaiorHorarioMatrizOk(){
+    SolucaoSaAlocacaoSala sa;
+
+    std::vector<Turma> vetorTurma;
+    Turma turma;
+    turma.setDemanda(50);
+    turma.setHorario( 0 );
+    turma.setCodigoTruma(0);
+    vetorTurma.push_back( turma );
+    turma.setDemanda(50);
+    turma.setHorario( 0 );
+    turma.setCodigoTruma(1);
+    vetorTurma.push_back( turma );
+    turma.setDemanda(50);
+    turma.setHorario( 3 );
+    turma.setCodigoTruma(2);
+    vetorTurma.push_back( turma );
+
+    sa.armazenarMaiorHorarioMatriz( vetorTurma );
+
+    assert( sa.maiorHorarioTurmas() == 3 );
+}
+
 #endif // SOLUCAOSAALOCACAOSALATEST_H
