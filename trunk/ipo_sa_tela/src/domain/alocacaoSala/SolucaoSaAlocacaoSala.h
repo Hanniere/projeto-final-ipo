@@ -26,22 +26,25 @@ public:
     std::list<Turma> turmasSalaVirtual() const;
     void setTurmasSalaVirtual(const std::list<Turma> &turmasSalaVirtual);
 
+    std::vector<Turma> listaTurma() const;
+    void setListaTurma(const std::vector<Turma> &listaTurma);
+
     int maiorHorarioTurmas() const;
     void setMaiorHorarioTurmas(int maiorHorarioTurmas);
 
     void gerarMatrizInicial();
 
-    void gerarSolucaoInicial( const std::vector<Turma>& vetorTurma );
+    void gerarSolucaoInicial();
 
-    int getSalaVaziaComCapacidade(const Turma &turma, const std::vector<Sala> vetorSala) const;
+    int getSalaVaziaComCapacidade(const Turma &turma) const;
 
     void setHorarioPorSala( const Turma& turma, int indiceSala );
 
-    void montarMatriz(std::vector<Sala> vetorSalaAux, std::vector<Turma> vetorTurmaAux);
+    void montarMatriz();
 
     bool gerarVizinhoPorSalaVirtual();
 
-    void armazenarMaiorHorarioMatriz( const std::vector<Turma>& vetor );
+    void armazenarMaiorHorarioMatriz();
 
     bool deveGerarVizinhoPelaTroca() const;
 
@@ -77,7 +80,7 @@ private:
      */
     int m_qtdeSalaVirtual;
 
-    // lista de salas dessa solucao
+    // vetor de salas dessa solucao
     std::vector<Sala> m_listaSala;
 
     /*
@@ -98,6 +101,9 @@ private:
      *utilizado para gerar o numero randomico para gerar vizinhos
      */
     int m_maiorHorarioTurmas;
+
+    // vetor de turmas dessa solucao
+    std::vector<Turma> m_listaTurma;
 };
 
 #endif // SOLUCAOSAALOCACAOSALA_H
