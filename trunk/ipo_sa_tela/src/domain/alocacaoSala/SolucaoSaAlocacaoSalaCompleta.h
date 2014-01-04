@@ -35,6 +35,9 @@ public:
     // copia os dados de uma solucao para outra
     void copia( const ISolucaoSa& solucao );
 
+    // calcula o custo e retorna o valor calculado
+    long int gerarCusto();
+
 private:
     // lista de salas
     std::vector<Sala> m_listaSala;

@@ -66,4 +66,14 @@ void SolucaoSaAlocacaoSalaCompleta::copia(const ISolucaoSa &solucao)
     memcpy( this, &solucao, sizeof( SolucaoSaAlocacaoSalaCompleta ) );
 }
 
+long SolucaoSaAlocacaoSalaCompleta::gerarCusto()
+{
+    m_custo = 0;
+    for( unsigned int i = 0; i < m_solucoes.size(); i++ ){
+        m_custo += m_solucoes[i]->gerarCusto();
+    }
+
+    return m_custo;
+}
+
 

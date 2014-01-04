@@ -9,8 +9,6 @@ void testeAlocacaoSolucaoOK(){
     SimulatedAnnelingAlocacaoSala sa;
     SolucaoSaAlocacaoSala* solucao = (SolucaoSaAlocacaoSala*)sa.alocaSolucao();
     assert( solucao != 0 );
-    assert( solucao->funcaoObjAnterior() == - 1 );
-    assert( solucao->funcaoObjAtual() == - 1 );
     assert( solucao->qtdeSalaVirtual() == - 1 );
     assert( solucao->listaSala().size() == 0 );
     assert( solucao->turmasSalaVirtual().size() == 0 );

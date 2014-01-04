@@ -75,6 +75,9 @@ public:
     // zera solucao
     void clear();
 
+    // calcula o custo e retorna o valor calculado
+    long int gerarCusto();
+
 private:
 
     // salar virtuais, salas utilizadas principalmente para solucao inicial

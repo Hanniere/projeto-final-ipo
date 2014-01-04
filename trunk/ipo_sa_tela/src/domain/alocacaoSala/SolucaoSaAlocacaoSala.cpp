@@ -389,6 +389,14 @@ void SolucaoSaAlocacaoSala::clear()
     m_matrizHorarioPorSala.clear();
 }
 
+long SolucaoSaAlocacaoSala::gerarCusto()
+{
+    m_custo = 0;;
+
+    // fazer o calculo antes de retornar
+
+    return m_custo;
+}
 
 std::vector<std::vector<int> > SolucaoSaAlocacaoSala::matrizHorarioPorSala() const
 {
