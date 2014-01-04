@@ -5,12 +5,13 @@
 #include <src/util/MathUtil.h>
 #include <algorithm>
 #include <cstring>
+#include <set>
 #include <cassert>
 
 SolucaoSaAlocacaoSala::SolucaoSaAlocacaoSala()
     : m_qtdeSalaVirtual( -1 ), m_listaSala( std::vector<Sala>() ),
       m_matrizHorarioPorSala( std::vector< std::vector<int> >() ),
-      m_turmasSalaVirtual( std::list<Turma>() )
+      m_turmasSalaVirtual( std::list<Turma>() ), m_listaTurma(  std::vector<Turma>() )
 {
 }
 
@@ -40,20 +41,20 @@ void SolucaoSaAlocacaoSala::gerarMatrizInicial(){
     }
 }
 
-void SolucaoSaAlocacaoSala::gerarSolucaoInicial(const std::vector<Turma> &vetorTurma)
+void SolucaoSaAlocacaoSala::gerarSolucaoInicial()
 {
     gerarMatrizInicial();
 
-    montarMatriz( m_listaSala, vetorTurma );
+    montarMatriz();
 
-    armazenarMaiorHorarioMatriz( vetorTurma );
+    armazenarMaiorHorarioMatriz();
 }
 
-int SolucaoSaAlocacaoSala::getSalaVaziaComCapacidade( const Turma& turma, const std::vector<Sala> vetorSala ) const
+int SolucaoSaAlocacaoSala::getSalaVaziaComCapacidade( const Turma& turma ) const
 {
-    for( unsigned int i = 0; i < vetorSala.size(); i++ ){
+    for( unsigned int i = 0; i < m_listaSala.size(); i++ ){
 
-        if( vetorSala[i].capacidade() >= turma.demanda() ){
+        if( m_listaSala[i].capacidade() >= turma.demanda() ){
             if( m_matrizHorarioPorSala[ turma.horario() ][i] == -1 )
                 return i;
         }
@@ -67,28 +68,28 @@ void SolucaoSaAlocacaoSala::setHorarioPorSala(const Turma &turma, int indiceSala
     m_matrizHorarioPorSala[ turma.horario() ][indiceSala] =  turma.codigoTruma();
 }
 
-void SolucaoSaAlocacaoSala::montarMatriz(std::vector<Sala> vetorSalaAux, std::vector<Turma> vetorTurmaAux)
+void SolucaoSaAlocacaoSala::montarMatriz()
 {
     m_qtdeSalaVirtual = 0;
 
-    std::sort( vetorTurmaAux.begin(), vetorTurmaAux.end(),
+    std::sort( m_listaTurma.begin(), m_listaTurma.end(),
                DemandaTurmaDecrescenteFunctor() );
 
-    std::sort( vetorSalaAux.begin(), vetorSalaAux.end(),
+    std::sort( m_listaSala.begin(), m_listaSala.end(),
                CapacidadeSalaDecrescenteFunctor() );
 
     // varre turmas
-    for( unsigned int i = 0; i < vetorTurmaAux.size(); i++ ){
-        Turma turma = vetorTurmaAux[i];
+    for( std::vector<Turma>::const_iterator it = m_listaTurma.begin(), end = m_listaTurma.end();
+         it != end; ++it ){
 
-        int salaVazia =  getSalaVaziaComCapacidade( turma, vetorSalaAux );
+        int salaVazia =  getSalaVaziaComCapacidade( *it );
         if( salaVazia != -1 ) {
-            m_matrizHorarioPorSala[ turma.horario() ][salaVazia] = turma.codigoTruma();
+            m_matrizHorarioPorSala[ (*it).horario() ][salaVazia] = (*it).codigoTruma();
         }
         else{
             m_qtdeSalaVirtual++;
             // adiciona na lista de turmas sem sala
-            m_turmasSalaVirtual.push_back( turma );
+            m_turmasSalaVirtual.push_back( *it );
         }
     }
 }
@@ -101,7 +102,7 @@ bool SolucaoSaAlocacaoSala::gerarVizinhoPorSalaVirtual()
         for( std::list<Turma>::const_iterator it = m_turmasSalaVirtual.begin(), end = m_turmasSalaVirtual.end();
              it != end; ++it ){
 
-            int salaVazia =  getSalaVaziaComCapacidade( *it, m_listaSala );
+            int salaVazia =  getSalaVaziaComCapacidade( *it );
             if( salaVazia != -1 ) {
                 m_matrizHorarioPorSala[ (*it).horario() ][salaVazia] = (*it).codigoTruma();
 
@@ -117,11 +118,11 @@ bool SolucaoSaAlocacaoSala::gerarVizinhoPorSalaVirtual()
     return false;
 }
 
-void SolucaoSaAlocacaoSala::armazenarMaiorHorarioMatriz(const std::vector<Turma> &vetor)
+void SolucaoSaAlocacaoSala::armazenarMaiorHorarioMatriz()
 {
     m_maiorHorarioTurmas = -1;
-    for( unsigned int i = 0; i < vetor.size(); i++ ){
-        int temp = vetor.at(i).horario();
+    for( unsigned int i = 0; i < m_listaTurma.size(); i++ ){
+        int temp = m_listaTurma.at(i).horario();
         if( temp > m_maiorHorarioTurmas )
             m_maiorHorarioTurmas = temp;
     }
@@ -143,6 +144,12 @@ void SolucaoSaAlocacaoSala::gerarVizinhoPorTroca()
     int colunaElemento1 = MathUtil::randomLimitado( m_listaSala.size() );
     int linhaElemento2 = MathUtil::randomLimitado( m_maiorHorarioTurmas );
     int colunaElemento2 = MathUtil::randomLimitado( m_listaSala.size() );
+
+    // garantir que nao troque -1 por -1 para gerar o vizinho
+    while( m_matrizHorarioPorSala.at(linhaElemento1).at( colunaElemento1 ) == -1 ){
+        linhaElemento1 = MathUtil::randomLimitado( m_maiorHorarioTurmas );
+        colunaElemento1 = MathUtil::randomLimitado( m_listaSala.size() );
+    }
 
     int temp = m_matrizHorarioPorSala.at(linhaElemento2).at( colunaElemento2 );
     m_matrizHorarioPorSala.at(linhaElemento2).at( colunaElemento2 ) =
@@ -249,4 +256,15 @@ int SolucaoSaAlocacaoSala::maiorHorarioTurmas() const
 void SolucaoSaAlocacaoSala::setMaiorHorarioTurmas(int maiorHorarioTurmas)
 {
     m_maiorHorarioTurmas = maiorHorarioTurmas;
+}
+
+
+std::vector<Turma> SolucaoSaAlocacaoSala::listaTurma() const
+{
+    return m_listaTurma;
+}
+
+void SolucaoSaAlocacaoSala::setListaTurma(const std::vector<Turma> &listaTurma)
+{
+    m_listaTurma = listaTurma;
 }

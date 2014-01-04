@@ -58,15 +58,15 @@ void testeGetSalaVaziaComCapacidadeOk(){
     turma.setCodigoTruma(2);
     vetorTurma.push_back( turma );
 
-    int indiceSala = sa.getSalaVaziaComCapacidade( vetorTurma[0], vetorSala );
+    int indiceSala = sa.getSalaVaziaComCapacidade( vetorTurma[0] );
     assert( indiceSala == 0 );
     sa.setHorarioPorSala( vetorTurma[0], indiceSala );
 
-    indiceSala = sa.getSalaVaziaComCapacidade( vetorTurma[1], vetorSala );
+    indiceSala = sa.getSalaVaziaComCapacidade( vetorTurma[1] );
     assert( indiceSala == 1 );
     sa.setHorarioPorSala( vetorTurma[1], indiceSala );
 
-    assert( sa.getSalaVaziaComCapacidade( vetorTurma[2], vetorSala ) == -1 );
+    assert( sa.getSalaVaziaComCapacidade( vetorTurma[2] ) == -1 );
 }
 
 void testeMontarMatrizOk(){
@@ -99,7 +99,8 @@ void testeMontarMatrizOk(){
     turma.setCodigoTruma(2);
     vetorTurma.push_back( turma );
 
-    sa.montarMatriz( vetorSala, vetorTurma );
+    sa.setListaTurma( vetorTurma );
+    sa.montarMatriz();
     std::vector< std::vector<int> > matrizHorarioPorSala = sa.matrizHorarioPorSala();
 
     assert( sa.qtdeSalaVirtual() == 1 );
@@ -177,7 +178,8 @@ void testeArmazenarMaiorHorarioMatrizOk(){
     turma.setCodigoTruma(2);
     vetorTurma.push_back( turma );
 
-    sa.armazenarMaiorHorarioMatriz( vetorTurma );
+    sa.setListaTurma( vetorTurma );
+    sa.armazenarMaiorHorarioMatriz();
 
     assert( sa.maiorHorarioTurmas() == 3 );
 }
