@@ -38,8 +38,8 @@ void SolucaoSaAlocacaoSala::gerarMatrizInicial(){
 
     armazenarMaiorHorarioMatriz();
 
-    m_matrizHorarioPorSala = std::vector< std::vector<int> >( m_maiorHorarioTurmas );
-    for( int i = 0; i < m_maiorHorarioTurmas; i++ ){
+    m_matrizHorarioPorSala = std::vector< std::vector<int> >( m_maiorHorarioTurmas +1 );
+    for( int i = 0; i <= m_maiorHorarioTurmas; i++ ){
         m_matrizHorarioPorSala[i] = std::vector<int>( m_listaSala.size(), -1 );
     }
 }
