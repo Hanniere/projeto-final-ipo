@@ -57,6 +57,8 @@ public:
 
     void incializaSetDeSalas();
 
+    std::set<int>::iterator getIteratorDoInteiroNoSet( std::set<int> setEntrada, int posicao ) const;
+
 // metodos virtuais
 public:
     std::string toString();
