@@ -15,6 +15,9 @@ Usando bitwise para ver qual operacao para gerar vizinho vamos usar
 
 usamos iterator para que caso deseja-se trocar os containers utilizados seja simples, pois as interfaces sao as mesmas
 
+Desempenho:
+Metodo SolucaoSaAlocacaoSala::buscarTurmaPorCodigo: Retornando ponteiro para evitar copia de objeto ja que sera feito varias vezes
+
 melhorias para desempenho/memoria: utilizar referencia para os atributos std::vector<Turma> e std::vector<Sala> da classe SolucaoSaAlocacaoSala, economiza memoria, pois assim fica duplicado na classe SolucaoSaAlocacaoSala e na SolucaoSaAlocacaoSalaCompleta.
 
 -------------------------------------------------
