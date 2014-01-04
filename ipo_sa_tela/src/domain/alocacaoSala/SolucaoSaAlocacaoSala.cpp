@@ -3,6 +3,7 @@
 #include <src/domain/functor/CapacidadeSalaFunctor.h>
 #include <src/domain/functor/DemandaTurmaFunctor.h>
 #include <src/domain/functor/CodigoTurmaFunctor.h>
+#include <src/enum/EstadoGeracaoVizinho.h>
 #include <src/util/MathUtil.h>
 #include <algorithm>
 #include <cstring>
@@ -217,7 +218,7 @@ bool SolucaoSaAlocacaoSala::gerarVizinhoPorTroca()
     return retorno;
 }
 
-void SolucaoSaAlocacaoSala::gerarVizinhoPorRealocacao()
+bool SolucaoSaAlocacaoSala::gerarVizinhoPorRealocacao()
 {
     int linhaElemento1 = MathUtil::randomLimitado( m_maiorHorarioTurmas );
     int colunaElemento1 = MathUtil::randomLimitado( m_listaSala.size() );
@@ -238,6 +239,8 @@ void SolucaoSaAlocacaoSala::gerarVizinhoPorRealocacao()
             realocou = true;
         }
     }while( realocou == false );
+
+    return realocou;
 }
 
 void SolucaoSaAlocacaoSala::ordenarTurmaPorCodigoParaGeracaoDeVizinho()
@@ -273,12 +276,50 @@ ISolucaoSa *SolucaoSaAlocacaoSala::gerarVizinho() const
 
     if( retorno->gerarVizinhoPorSalaVirtual() == false ){
 
+        EstadoGeracaoVizinho estado;
         if( retorno->deveGerarVizinhoPelaTroca() == true ) {
-            retorno->gerarVizinhoPorTroca();
+            estado = FAZER_TROCA;
         }
         else{
-            retorno->gerarVizinhoPorRealocacao();
+            estado = FAZER_REALOCACAO;
         }
+
+        do{
+            switch (estado) {
+            case FAZER_TROCA:
+                if( retorno->gerarVizinhoPorTroca() == false )
+                    estado = FALHA_TROCA;
+                else
+                    estado = ESTADO_GERACAO_VIZINHO_FINAL;
+
+                break;
+
+            case FALHA_TROCA:
+                retorno->gerarVizinhoPorRealocacao();
+                // deve sair de qualquer forma, pois falhou troca e tentou realocacao
+                estado = ESTADO_GERACAO_VIZINHO_FINAL;
+
+                break;
+
+            case FAZER_REALOCACAO:
+                if( retorno->gerarVizinhoPorRealocacao() == false )
+                    estado = FALHA_REALOCAO;
+                else
+                    estado = ESTADO_GERACAO_VIZINHO_FINAL;
+
+                break;
+
+            case FALHA_REALOCAO:
+                retorno->gerarVizinhoPorTroca();
+                // deve sair de qualquer forma, pois falhou realocacao e tentou troca
+                estado = ESTADO_GERACAO_VIZINHO_FINAL;
+
+                break;
+
+            default:
+                break;
+            }
+        }while( estado != ESTADO_GERACAO_VIZINHO_FINAL );
     }
 
     return retorno;
