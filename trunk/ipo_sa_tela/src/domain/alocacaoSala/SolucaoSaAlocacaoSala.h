@@ -9,8 +9,6 @@
 class SolucaoSaAlocacaoSala : public ISolucaoSa
 {
 public:
-    static const int QTDE_HORARIOS_DEFAULT = 20;
-
     SolucaoSaAlocacaoSala();
     virtual ~SolucaoSaAlocacaoSala();
 
