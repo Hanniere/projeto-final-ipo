@@ -66,7 +66,7 @@ int SolucaoSaAlocacaoSala::getSalaVaziaComCapacidade( const Turma& turma ) const
 
 void SolucaoSaAlocacaoSala::setHorarioPorSala(const Turma &turma, int indiceSala)
 {
-    m_matrizHorarioPorSala[ turma.horario() ][indiceSala] =  turma.codigoTruma();
+    m_matrizHorarioPorSala[ turma.horario() ][indiceSala] =  turma.codigoTurma();
 }
 
 void SolucaoSaAlocacaoSala::montarMatriz()
@@ -85,7 +85,7 @@ void SolucaoSaAlocacaoSala::montarMatriz()
 
         int salaVazia =  getSalaVaziaComCapacidade( *it );
         if( salaVazia != -1 ) {
-            m_matrizHorarioPorSala[ (*it).horario() ][salaVazia] = (*it).codigoTruma();
+            m_matrizHorarioPorSala[ (*it).horario() ][salaVazia] = (*it).codigoTurma();
         }
         else{
             m_qtdeSalaVirtual++;
@@ -105,7 +105,7 @@ bool SolucaoSaAlocacaoSala::gerarVizinhoPorSalaVirtual()
 
             int salaVazia =  getSalaVaziaComCapacidade( *it );
             if( salaVazia != -1 ) {
-                m_matrizHorarioPorSala[ (*it).horario() ][salaVazia] = (*it).codigoTruma();
+                m_matrizHorarioPorSala[ (*it).horario() ][salaVazia] = (*it).codigoTurma();
 
                 m_qtdeSalaVirtual--;
                 // adiciona na lista de turmas sem sala

@@ -1,7 +1,7 @@
 #include "Turma.h"
 
 Turma::Turma()
-    : m_codigoTruma( -1 ), m_demanda( -1 ), m_diaSemana( DIA_INVALIDO ), m_horario( -1 )
+    : m_codigoTurma( -1 ), m_demanda( -1 ), m_diaSemana( DIA_INVALIDO ), m_horario( -1 )
 {
 }
 
@@ -21,7 +21,7 @@ void Turma::setHorario(int horario)
 
 bool Turma::operator ==(const Turma &outro)
 {
-    if( m_codigoTruma == outro.codigoTruma() ){
+    if( m_codigoTurma == outro.codigoTurma() ){
         if( m_demanda == outro.demanda() ){
             if( m_diaSemana == outro.diaSemana() ){
                 if( m_horario == outro.horario() )
@@ -53,12 +53,12 @@ void Turma::setDemanda(int demanda)
     m_demanda = demanda;
 }
 
-int Turma::codigoTruma() const
+int Turma::codigoTurma() const
 {
-    return m_codigoTruma;
+    return m_codigoTurma;
 }
 
-void Turma::setCodigoTruma(int codigoTruma)
+void Turma::setCodigoTurma(int codigoTurma)
 {
-    m_codigoTruma = codigoTruma;
+    m_codigoTurma = codigoTurma;
 }

@@ -13,15 +13,15 @@ void testeGeraMatrizInicialOk(){
     Turma turma;
     turma.setDemanda(50);
     turma.setHorario( 0 );
-    turma.setCodigoTruma(0);
+    turma.setCodigoTurma(0);
     vetorTurma.push_back( turma );
     turma.setDemanda(50);
     turma.setHorario( 0 );
-    turma.setCodigoTruma(1);
+    turma.setCodigoTurma(1);
     vetorTurma.push_back( turma );
     turma.setDemanda(50);
     turma.setHorario( 0 );
-    turma.setCodigoTruma(2);
+    turma.setCodigoTurma(2);
     vetorTurma.push_back( turma );
 
     sa.setListaSala( vetorSala );
@@ -60,15 +60,15 @@ void testeGetSalaVaziaComCapacidadeOk(){
     Turma turma;
     turma.setDemanda(50);
     turma.setHorario( 0 );
-    turma.setCodigoTruma(0);
+    turma.setCodigoTurma(0);
     vetorTurma.push_back( turma );
     turma.setDemanda(50);
     turma.setHorario( 0 );
-    turma.setCodigoTruma(1);
+    turma.setCodigoTurma(1);
     vetorTurma.push_back( turma );
     turma.setDemanda(50);
     turma.setHorario( 0 );
-    turma.setCodigoTruma(2);
+    turma.setCodigoTurma(2);
     vetorTurma.push_back( turma );
 
     sa.setListaTurma( vetorTurma );
@@ -102,15 +102,15 @@ void testeMontarMatrizOk(){
     Turma turma;
     turma.setDemanda(50);
     turma.setHorario( 0 );
-    turma.setCodigoTruma(0);
+    turma.setCodigoTurma(0);
     vetorTurma.push_back( turma );
     turma.setDemanda(50);
     turma.setHorario( 0 );
-    turma.setCodigoTruma(1);
+    turma.setCodigoTurma(1);
     vetorTurma.push_back( turma );
     turma.setDemanda(50);
     turma.setHorario( 0 );
-    turma.setCodigoTruma(2);
+    turma.setCodigoTurma(2);
     vetorTurma.push_back( turma );
 
     sa.setListaTurma( vetorTurma );
@@ -124,14 +124,6 @@ void testeMontarMatrizOk(){
     assert( matrizHorarioPorSala[0][0] == 0);
     assert( matrizHorarioPorSala[0][1] == 1);
     assert( matrizHorarioPorSala[0][2] == -1);
-
-//    assert( matrizHorarioPorSala[1][0] == -1);
-//    assert( matrizHorarioPorSala[1][1] == -1);
-//    assert( matrizHorarioPorSala[1][2] == -1);
-
-//    assert( matrizHorarioPorSala[2][0] == -1);
-//    assert( matrizHorarioPorSala[2][1] == -1);
-//    assert( matrizHorarioPorSala[2][2] == -1);
 }
 
 void testeGerarVizinhoSalaVirtualOk(){
@@ -150,15 +142,15 @@ void testeGerarVizinhoSalaVirtualOk(){
     Turma turma;
     turma.setDemanda(50);
     turma.setHorario( 0 );
-    turma.setCodigoTruma(0);
+    turma.setCodigoTurma(0);
     vetorTurma.push_back( turma );
     turma.setDemanda(50);
     turma.setHorario( 0 );
-    turma.setCodigoTruma(1);
+    turma.setCodigoTurma(1);
     vetorTurma.push_back( turma );
     turma.setDemanda(50);
     turma.setHorario( 1 );
-    turma.setCodigoTruma(2);
+    turma.setCodigoTurma(2);
     vetorTurma.push_back( turma );
 
     sa.setListaTurma( vetorTurma );
@@ -168,7 +160,7 @@ void testeGerarVizinhoSalaVirtualOk(){
     std::list<Turma> listaTurma;
     turma.setDemanda(50);
     turma.setHorario( 0 );
-    turma.setCodigoTruma(0);
+    turma.setCodigoTurma(0);
     listaTurma.push_back( turma );
 
     sa.setTurmasSalaVirtual( listaTurma );
@@ -185,10 +177,6 @@ void testeGerarVizinhoSalaVirtualOk(){
     assert( matrizHorarioPorSala[1][0] == -1);
     assert( matrizHorarioPorSala[1][1] == -1);
     assert( matrizHorarioPorSala[1][2] == -1);
-
-//    assert( matrizHorarioPorSala[2][0] == -1);
-//    assert( matrizHorarioPorSala[2][1] == -1);
-//    assert( matrizHorarioPorSala[2][2] == -1);
 }
 
 void testeArmazenarMaiorHorarioMatrizOk(){
@@ -198,15 +186,15 @@ void testeArmazenarMaiorHorarioMatrizOk(){
     Turma turma;
     turma.setDemanda(50);
     turma.setHorario( 0 );
-    turma.setCodigoTruma(0);
+    turma.setCodigoTurma(0);
     vetorTurma.push_back( turma );
     turma.setDemanda(50);
     turma.setHorario( 0 );
-    turma.setCodigoTruma(1);
+    turma.setCodigoTurma(1);
     vetorTurma.push_back( turma );
     turma.setDemanda(50);
     turma.setHorario( 3 );
-    turma.setCodigoTruma(2);
+    turma.setCodigoTurma(2);
     vetorTurma.push_back( turma );
 
     sa.setListaTurma( vetorTurma );
