@@ -9,7 +9,23 @@ void testeGeraMatrizInicialOk(){
     SolucaoSaAlocacaoSala sa;
     std::vector<Sala> vetorSala(10);
 
+    std::vector<Turma> vetorTurma;
+    Turma turma;
+    turma.setDemanda(50);
+    turma.setHorario( 0 );
+    turma.setCodigoTruma(0);
+    vetorTurma.push_back( turma );
+    turma.setDemanda(50);
+    turma.setHorario( 0 );
+    turma.setCodigoTruma(1);
+    vetorTurma.push_back( turma );
+    turma.setDemanda(50);
+    turma.setHorario( 0 );
+    turma.setCodigoTruma(2);
+    vetorTurma.push_back( turma );
+
     sa.setListaSala( vetorSala );
+    sa.setListaTurma( vetorTurma );
     sa.gerarMatrizInicial();
 
     std::vector< std::vector<int> > matrizHorarioPorSala = sa.matrizHorarioPorSala();
@@ -40,9 +56,6 @@ void testeGetSalaVaziaComCapacidadeOk(){
     sala.setCapacidade( 40 );
     vetorSala.push_back( sala );
 
-    sa.setListaSala( vetorSala );
-    sa.gerarMatrizInicial();
-
     std::vector<Turma> vetorTurma;
     Turma turma;
     turma.setDemanda(50);
@@ -57,6 +70,10 @@ void testeGetSalaVaziaComCapacidadeOk(){
     turma.setHorario( 0 );
     turma.setCodigoTruma(2);
     vetorTurma.push_back( turma );
+
+    sa.setListaTurma( vetorTurma );
+    sa.setListaSala( vetorSala );
+    sa.gerarMatrizInicial();
 
     int indiceSala = sa.getSalaVaziaComCapacidade( vetorTurma[0] );
     assert( indiceSala == 0 );
@@ -81,9 +98,6 @@ void testeMontarMatrizOk(){
     sala.setCapacidade( 40 );
     vetorSala.push_back( sala );
 
-    sa.setListaSala( vetorSala );
-    sa.gerarMatrizInicial();
-
     std::vector<Turma> vetorTurma;
     Turma turma;
     turma.setDemanda(50);
@@ -100,7 +114,10 @@ void testeMontarMatrizOk(){
     vetorTurma.push_back( turma );
 
     sa.setListaTurma( vetorTurma );
+    sa.setListaSala( vetorSala );
+    sa.gerarMatrizInicial();
     sa.montarMatriz();
+
     std::vector< std::vector<int> > matrizHorarioPorSala = sa.matrizHorarioPorSala();
 
     assert( sa.qtdeSalaVirtual() == 1 );
@@ -108,13 +125,13 @@ void testeMontarMatrizOk(){
     assert( matrizHorarioPorSala[0][1] == 1);
     assert( matrizHorarioPorSala[0][2] == -1);
 
-    assert( matrizHorarioPorSala[1][0] == -1);
-    assert( matrizHorarioPorSala[1][1] == -1);
-    assert( matrizHorarioPorSala[1][2] == -1);
+//    assert( matrizHorarioPorSala[1][0] == -1);
+//    assert( matrizHorarioPorSala[1][1] == -1);
+//    assert( matrizHorarioPorSala[1][2] == -1);
 
-    assert( matrizHorarioPorSala[2][0] == -1);
-    assert( matrizHorarioPorSala[2][1] == -1);
-    assert( matrizHorarioPorSala[2][2] == -1);
+//    assert( matrizHorarioPorSala[2][0] == -1);
+//    assert( matrizHorarioPorSala[2][1] == -1);
+//    assert( matrizHorarioPorSala[2][2] == -1);
 }
 
 void testeGerarVizinhoSalaVirtualOk(){
@@ -129,11 +146,26 @@ void testeGerarVizinhoSalaVirtualOk(){
     sala.setCapacidade( 40 );
     vetorSala.push_back( sala );
 
+    std::vector<Turma> vetorTurma;
+    Turma turma;
+    turma.setDemanda(50);
+    turma.setHorario( 0 );
+    turma.setCodigoTruma(0);
+    vetorTurma.push_back( turma );
+    turma.setDemanda(50);
+    turma.setHorario( 0 );
+    turma.setCodigoTruma(1);
+    vetorTurma.push_back( turma );
+    turma.setDemanda(50);
+    turma.setHorario( 1 );
+    turma.setCodigoTruma(2);
+    vetorTurma.push_back( turma );
+
+    sa.setListaTurma( vetorTurma );
     sa.setListaSala( vetorSala );
     sa.gerarMatrizInicial();
 
     std::list<Turma> listaTurma;
-    Turma turma;
     turma.setDemanda(50);
     turma.setHorario( 0 );
     turma.setCodigoTruma(0);
@@ -141,7 +173,6 @@ void testeGerarVizinhoSalaVirtualOk(){
 
     sa.setTurmasSalaVirtual( listaTurma );
     sa.setQtdeSalaVirtual( listaTurma.size() );
-
     assert( sa.gerarVizinhoPorSalaVirtual() == true );
 
     std::vector< std::vector<int> > matrizHorarioPorSala = sa.matrizHorarioPorSala();
@@ -155,9 +186,9 @@ void testeGerarVizinhoSalaVirtualOk(){
     assert( matrizHorarioPorSala[1][1] == -1);
     assert( matrizHorarioPorSala[1][2] == -1);
 
-    assert( matrizHorarioPorSala[2][0] == -1);
-    assert( matrizHorarioPorSala[2][1] == -1);
-    assert( matrizHorarioPorSala[2][2] == -1);
+//    assert( matrizHorarioPorSala[2][0] == -1);
+//    assert( matrizHorarioPorSala[2][1] == -1);
+//    assert( matrizHorarioPorSala[2][2] == -1);
 }
 
 void testeArmazenarMaiorHorarioMatrizOk(){
