@@ -52,6 +52,8 @@ void SolucaoSaAlocacaoSala::gerarSolucaoInicial()
     montarMatriz();
 
     ordenarTurmaPorCodigoParaGeracaoDeVizinho();
+
+    incializaSetDeSalas();
 }
 
 int SolucaoSaAlocacaoSala::getSalaVaziaComCapacidade( const Turma& turma ) const
@@ -142,30 +144,77 @@ bool SolucaoSaAlocacaoSala::deveGerarVizinhoPelaTroca() const
     return false;
 }
 
-void SolucaoSaAlocacaoSala::gerarVizinhoPorTroca()
+bool SolucaoSaAlocacaoSala::gerarVizinhoPorTroca()
 {
-    int linhaElemento1 = MathUtil::randomLimitado( m_maiorHorarioTurmas );
-    int colunaElemento1 = MathUtil::randomLimitado( m_listaSala.size() );
-    int linhaElemento2 = MathUtil::randomLimitado( m_maiorHorarioTurmas );
-    int colunaElemento2 = MathUtil::randomLimitado( m_listaSala.size() );
+    bool retorno = false;
+
+    int horarioTurma = MathUtil::randomLimitado( m_maiorHorarioTurmas );
+    int salaTurma1 = MathUtil::randomLimitado( m_listaSala.size() );
+    int salaTurma2;
 
     // garantir que nao troque -1 por -1 para gerar o vizinho
     // armazena id para buscar turma no vetor e ter acesso a seus dados
-    int idTurma = m_matrizHorarioPorSala.at(linhaElemento1).at( colunaElemento1 );
+    int idTurma = m_matrizHorarioPorSala.at(horarioTurma).at( salaTurma1 );
     while( idTurma == -1 ){
-        linhaElemento1 = MathUtil::randomLimitado( m_maiorHorarioTurmas );
-        colunaElemento1 = MathUtil::randomLimitado( m_listaSala.size() );
+        horarioTurma = MathUtil::randomLimitado( m_maiorHorarioTurmas );
+        salaTurma1 = MathUtil::randomLimitado( m_listaSala.size() );
 
-        idTurma = m_matrizHorarioPorSala.at(linhaElemento1).at( colunaElemento1 );
+        idTurma = m_matrizHorarioPorSala.at(horarioTurma).at( salaTurma1 );
     }
 
-    Turma* turma = buscarTurmaPorCodigo( idTurma );
+    Turma* turma1 = buscarTurmaPorCodigo( idTurma );
 
-    int temp = m_matrizHorarioPorSala.at(linhaElemento2).at( colunaElemento2 );
-    m_matrizHorarioPorSala.at(linhaElemento2).at( colunaElemento2 ) =
-             m_matrizHorarioPorSala.at(linhaElemento1).at( colunaElemento1 );
+    /*
+     * procurar uma sala ocupada no mesmo horario que caiba essa turma
+     *e a que for substituida caiba na turma acima
+     */
 
-    m_matrizHorarioPorSala.at(linhaElemento1).at( colunaElemento1 ) = temp;
+    std::set<int> setSalatTemp = m_setSalas;
+    std::set<int>::iterator itSet;
+    // limita o indice randomico a ser utilizado na geracao do vizinho
+    int indiceMaxSala = setSalatTemp.size();
+
+    do{
+        salaTurma2 = MathUtil::randomLimitado( indiceMaxSala );
+
+        itSet = setSalatTemp.find(salaTurma2);
+
+        // se a capacidade for menor elimina os elementos em sequencia, pois esta ordenado
+        if( m_listaSala.at( *itSet ).capacidade() < turma1->demanda() ){
+            setSalatTemp.erase( itSet, setSalatTemp.end() );
+        }
+        else{
+            int temp = m_matrizHorarioPorSala.at(horarioTurma).at( salaTurma2 );
+            if( temp == -1 ){
+                // remove do set, pois so podemos fazer troca
+                setSalatTemp.erase( itSet );
+            }else{
+                // realiza a troca, caso a turma dessa posicao puder ir para a antiga
+                Turma* turma2 = buscarTurmaPorCodigo( temp );
+                // pego a sala de turma1 e vejo se turma2 cabe
+                if( m_listaSala.at( salaTurma1 ).capacidade() >= turma2->demanda() ){
+                    // pode trocar
+                    m_matrizHorarioPorSala.at(horarioTurma).at( salaTurma2 ) =
+                             m_matrizHorarioPorSala.at(horarioTurma).at( salaTurma1 );
+
+                    m_matrizHorarioPorSala.at(horarioTurma).at( salaTurma1 ) = temp;
+
+                    retorno = true;
+
+                    break;
+                }
+                else{
+                    // remove do set, pois a troca nao eh possivel ja que a turma dois nao cabee na atual sala da turma1
+                    setSalatTemp.erase( itSet );
+                }
+            }
+        }
+
+        indiceMaxSala = setSalatTemp.size();
+
+    }while( indiceMaxSala > 0 );
+
+    return retorno;
 }
 
 void SolucaoSaAlocacaoSala::gerarVizinhoPorRealocacao()
@@ -203,6 +252,12 @@ Turma* SolucaoSaAlocacaoSala::buscarTurmaPorCodigo(int codigoTurma)
             std::find_if( m_listaTurma.begin(), m_listaTurma.end(), BuscaPorCodigoTurma(codigoTurma) );
 
     return &*it;
+}
+
+void SolucaoSaAlocacaoSala::incializaSetDeSalas()
+{
+    for( unsigned int i = 0; i < m_listaSala.size(); i++ )
+        m_setSalas.insert( i );
 }
 
 int SolucaoSaAlocacaoSala::tamanhoSolucaoSa() const
