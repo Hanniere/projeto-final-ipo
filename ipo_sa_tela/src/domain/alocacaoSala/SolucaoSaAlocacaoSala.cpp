@@ -178,7 +178,7 @@ bool SolucaoSaAlocacaoSala::gerarVizinhoPorTroca()
     do{
         salaTurma2 = MathUtil::randomLimitado( indiceMaxSala );
 
-        itSet = setSalatTemp.find(salaTurma2);
+        itSet = getIteratorDoInteiroNoSet( setSalatTemp, salaTurma2 );
 
         // se a capacidade for menor elimina os elementos em sequencia, pois esta ordenado
         if( m_listaSala.at( *itSet ).capacidade() < turma1->demanda() ){
@@ -220,27 +220,66 @@ bool SolucaoSaAlocacaoSala::gerarVizinhoPorTroca()
 
 bool SolucaoSaAlocacaoSala::gerarVizinhoPorRealocacao()
 {
-    int linhaElemento1 = MathUtil::randomLimitado( m_maiorHorarioTurmas );
-    int colunaElemento1 = MathUtil::randomLimitado( m_listaSala.size() );
-    int linhaElemento2, colunaElemento2;
+    bool retorno = false;
 
-    bool realocou = false;
+    int horarioTurma = MathUtil::randomLimitado( m_maiorHorarioTurmas );
+    int salaTurma1 = MathUtil::randomLimitado( m_listaSala.size() );
+    int novaSala;
+
+    // garantir que nao realoque uma turma que nao exista ainda
+    // armazena id para buscar turma no vetor e ter acesso a seus dados
+    int idTurma = m_matrizHorarioPorSala.at(horarioTurma).at( salaTurma1 );
+    while( idTurma == -1 ){
+        horarioTurma = MathUtil::randomLimitado( m_maiorHorarioTurmas );
+        salaTurma1 = MathUtil::randomLimitado( m_listaSala.size() );
+
+        idTurma = m_matrizHorarioPorSala.at(horarioTurma).at( salaTurma1 );
+    }
+
+    Turma* turma1 = buscarTurmaPorCodigo( idTurma );
+
+    /*
+     * procurar por uma sala desocupada que caiba a turma1
+     */
+
+    std::set<int> setSalatTemp = m_setSalas;
+    std::set<int>::iterator itSet;
+    // limita o indice randomico a ser utilizado na geracao do vizinho
+    setSalatTemp.erase( setSalatTemp.find( salaTurma1 ) ); // remove a sala da turma1 da busca
+    int indiceMaxSala = setSalatTemp.size();
+
     do{
-        linhaElemento2 = MathUtil::randomLimitado( m_maiorHorarioTurmas );
-        colunaElemento2 = MathUtil::randomLimitado( m_listaSala.size() );
+        novaSala = MathUtil::randomLimitado( indiceMaxSala );
 
-        if( m_matrizHorarioPorSala.at(linhaElemento2).at( colunaElemento2 ) == -1 ){
-            // realoca
-            m_matrizHorarioPorSala.at(linhaElemento2).at( colunaElemento2 ) =
-                    m_matrizHorarioPorSala.at(linhaElemento1).at( colunaElemento1 );
+        itSet = getIteratorDoInteiroNoSet( setSalatTemp, novaSala );
 
-            m_matrizHorarioPorSala.at(linhaElemento1).at( colunaElemento1 ) = -1;
-
-            realocou = true;
+        // se a capacidade for menor elimina os elementos em sequencia, pois esta ordenado
+        if( m_listaSala.at( *itSet ).capacidade() < turma1->demanda() ){
+            setSalatTemp.erase( itSet, setSalatTemp.end() );
         }
-    }while( realocou == false );
+        else{
+            int temp = m_matrizHorarioPorSala.at(horarioTurma).at( novaSala );
+            if( temp != -1 ){
+                // remove do set, pois so podemos fazer realocacao e como eh != -1 ja tem turma nessa sala
+                setSalatTemp.erase( itSet );
+            }else{
+                // realiza a realocacao
+                m_matrizHorarioPorSala.at(horarioTurma).at( novaSala ) =
+                         m_matrizHorarioPorSala.at(horarioTurma).at( salaTurma1 );
 
-    return realocou;
+                m_matrizHorarioPorSala.at(horarioTurma).at( salaTurma1 ) = -1;
+
+                retorno = true;
+
+                break;
+            }
+        }
+
+        indiceMaxSala = setSalatTemp.size();
+
+    }while( indiceMaxSala > 0 );
+
+    return retorno;
 }
 
 void SolucaoSaAlocacaoSala::ordenarTurmaPorCodigoParaGeracaoDeVizinho()
@@ -261,6 +300,19 @@ void SolucaoSaAlocacaoSala::incializaSetDeSalas()
 {
     for( unsigned int i = 0; i < m_listaSala.size(); i++ )
         m_setSalas.insert( i );
+}
+
+std::set<int>::iterator SolucaoSaAlocacaoSala::getIteratorDoInteiroNoSet(std::set<int> setEntrada, int posicao) const
+{
+    std::set<int>::iterator it = setEntrada.end();
+    if( setEntrada.size() > (unsigned int) posicao ){
+        it = setEntrada.begin();
+
+        for( int i = 0; i < posicao; i++ )
+            ++it;
+    }
+
+    return it;
 }
 
 int SolucaoSaAlocacaoSala::tamanhoSolucaoSa() const
