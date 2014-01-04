@@ -1,6 +1,34 @@
+Remover os asserts do src
+
+---------------------------------------------------------------------
 Usamos:
+
 Factory + Singleton
+
 Template Method
+
 Teste unitario utilizando assert para nao amarrar ao Qt
 
 Alocacao de vector para tamnho especifico afim de evitar array copy -> std::vector<T> vetorT = std::vector<T>( tamanhoVetor );
+
+Usando bitwise para ver qual operacao para gerar vizinho vamos usar
+
+usamos iterator para que caso deseja-se trocar os containers utilizados seja simples, pois as interfaces sao as mesmas
+
+melhorias para desempenho/memoria: utilizar referencia para os atributos std::vector<Turma> e std::vector<Sala> da classe SolucaoSaAlocacaoSala, economiza memoria, pois assim fica duplicado na classe SolucaoSaAlocacaoSala e na SolucaoSaAlocacaoSalaCompleta.
+
+-------------------------------------------------
+
+Gerar novo problema:
+Classes de dominio
+Classe SolucaoSaNova
+Classe Parser
+
+Implementa classe SimulatedAnnealingNova{
+    bool carregarDadosEntrada( const std::string& nomeArquivo );
+    ISolucaoSa* geraSolucaoInicial();
+    ISolucaoSa* alocaSolucao() const;
+    int tamanhoSolucaoSa() const;
+    void gerarVizinho( ISolucaoSa* vizinho, const ISolucaoSa* atual ) const;
+}
+
