@@ -2,6 +2,7 @@
 
 #include <src/domain/functor/CapacidadeSalaFunctor.h>
 #include <src/domain/functor/DemandaTurmaFunctor.h>
+#include <src/domain/functor/CodigoTurmaFunctor.h>
 #include <src/util/MathUtil.h>
 #include <algorithm>
 #include <cstring>
@@ -49,6 +50,8 @@ void SolucaoSaAlocacaoSala::gerarSolucaoInicial()
     gerarMatrizInicial();
 
     montarMatriz();
+
+    ordenarTurmaPorCodigoParaGeracaoDeVizinho();
 }
 
 int SolucaoSaAlocacaoSala::getSalaVaziaComCapacidade( const Turma& turma ) const
@@ -147,10 +150,16 @@ void SolucaoSaAlocacaoSala::gerarVizinhoPorTroca()
     int colunaElemento2 = MathUtil::randomLimitado( m_listaSala.size() );
 
     // garantir que nao troque -1 por -1 para gerar o vizinho
-    while( m_matrizHorarioPorSala.at(linhaElemento1).at( colunaElemento1 ) == -1 ){
+    // armazena id para buscar turma no vetor e ter acesso a seus dados
+    int idTurma = m_matrizHorarioPorSala.at(linhaElemento1).at( colunaElemento1 );
+    while( idTurma == -1 ){
         linhaElemento1 = MathUtil::randomLimitado( m_maiorHorarioTurmas );
         colunaElemento1 = MathUtil::randomLimitado( m_listaSala.size() );
+
+        idTurma = m_matrizHorarioPorSala.at(linhaElemento1).at( colunaElemento1 );
     }
+
+    Turma* turma = buscarTurmaPorCodigo( idTurma );
 
     int temp = m_matrizHorarioPorSala.at(linhaElemento2).at( colunaElemento2 );
     m_matrizHorarioPorSala.at(linhaElemento2).at( colunaElemento2 ) =
@@ -180,6 +189,20 @@ void SolucaoSaAlocacaoSala::gerarVizinhoPorRealocacao()
             realocou = true;
         }
     }while( realocou == false );
+}
+
+void SolucaoSaAlocacaoSala::ordenarTurmaPorCodigoParaGeracaoDeVizinho()
+{
+    std::sort( m_listaTurma.begin(), m_listaTurma.end(),
+               CodigoTurmaCrescenteFunctor() );
+}
+
+Turma* SolucaoSaAlocacaoSala::buscarTurmaPorCodigo(int codigoTurma)
+{
+    std::vector<Turma>::iterator it =
+            std::find_if( m_listaTurma.begin(), m_listaTurma.end(), BuscaPorCodigoTurma(codigoTurma) );
+
+    return &*it;
 }
 
 int SolucaoSaAlocacaoSala::tamanhoSolucaoSa() const
