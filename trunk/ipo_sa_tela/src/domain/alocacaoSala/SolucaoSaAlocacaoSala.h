@@ -49,7 +49,7 @@ public:
 
     bool gerarVizinhoPorTroca();
 
-    void gerarVizinhoPorRealocacao();
+    bool gerarVizinhoPorRealocacao();
 
     void ordenarTurmaPorCodigoParaGeracaoDeVizinho();
 
