@@ -28,8 +28,8 @@ ISolucaoSa *ISimulatedAnneling::simulatedAnneling( ISolucaoSa* solucaoAtual )
 
             vizinho = solucaoAtual->gerarVizinho();
 
-            int delta =  vizinho->funcaoObjAtual() -
-                    solucaoAtual->funcaoObjAtual();
+            int delta =  vizinho->gerarCusto() -
+                    solucaoAtual->gerarCusto();
 
             if( delta < 0 ){
                 solucaoAtual->copia( *vizinho );
@@ -37,8 +37,8 @@ ISolucaoSa *ISimulatedAnneling::simulatedAnneling( ISolucaoSa* solucaoAtual )
                 // desaloca vizinho
                 delete vizinho;
 
-                if( solucaoAtual->funcaoObjAtual() <
-                        melhorSolucao->funcaoObjAtual() ){
+                if( solucaoAtual->custo() <
+                        melhorSolucao->gerarCusto() ){
 
                     melhorSolucao->copia( *solucaoAtual );
                 }

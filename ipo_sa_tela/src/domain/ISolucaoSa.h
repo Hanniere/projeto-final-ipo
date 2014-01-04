@@ -9,11 +9,7 @@ public:
     ISolucaoSa();
     virtual ~ISolucaoSa();
 
-    int funcaoObjAtual() const;
-    void setFuncaoObjAtual(int funcaoObjAtual);
-
-    int funcaoObjAnterior() const;
-    void setFuncaoObjAnterior(int funcaoObjAnterior);
+    long custo() const;
 
 // metodos virtuais
 public:
@@ -28,14 +24,14 @@ public:
     // zera solucao
     virtual void clear() = 0;
 
+    // to string da solucao
     virtual std::string toString() = 0;
 
-protected:
-    // funcao obj atual
-    int m_funcaoObjAtual;
+    // calcula o custo e retorna o valor calculado
+    virtual long int gerarCusto() = 0;
 
-    // funcao obj anterior( corrente )
-    int m_funcaoObjAnterior;
+protected:
+    long int m_custo;
 };
 
 #endif // ISOLUCAOSA_H
