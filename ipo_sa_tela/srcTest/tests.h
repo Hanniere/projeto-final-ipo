@@ -8,6 +8,7 @@
 #include <srcTest/domain/functor/CapacidadeSalaFunctorTest.h>
 #include <srcTest/util/MathUtilTest.h>
 #include <srcTest/domain/alocacaoSala/SolucaoSaAlocacaoSalaTest.h>
+#include <srcTest/domain/functor/CodigoTurmaFunctorTest.h>
 
 void mainTestes(){
     // ParserSimulatedAnnelingAlocacaoSalaArquivoTest
@@ -40,6 +41,10 @@ void mainTestes(){
     testeMontarMatrizOk();
     testeGerarVizinhoSalaVirtualOk();
     testeArmazenarMaiorHorarioMatrizOk();
+
+    // CodigoTurmaFunctorTest
+    ordenaCoridgoTurmaCrescenteOK();
+    ordenaCoridgoTurmaDecrescenteOK();
 }
 
 #endif // TESTS_H

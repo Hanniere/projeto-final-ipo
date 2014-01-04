@@ -9,9 +9,6 @@ public:
     Turma();
     virtual ~Turma();
 
-    int codigoTruma() const;
-    void setCodigoTruma(int codigoTruma);
-
     int demanda() const;
     void setDemanda(int demanda);
 
@@ -23,9 +20,12 @@ public:
 
     bool operator==(const Turma& outro );
 
+    int codigoTurma() const;
+    void setCodigoTurma(int codigoTurma);
+
 private:
     // codigo da turma
-    int m_codigoTruma;
+    int m_codigoTurma;
 
     // demanda da turma ( tamanho )
     int m_demanda;

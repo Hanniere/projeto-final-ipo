@@ -49,7 +49,7 @@ bool ParserSimulatedAnnelingAlocacaoSalaArquivo::parse(const std::string &entrad
                 return false;
 
             turma.setDiaSemana( (DiaSemana)diaSemana );
-            turma.setCodigoTruma( i );
+            turma.setCodigoTurma( i );
             turma.setDemanda( demanda );
             turma.setHorario( horario );
 

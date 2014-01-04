@@ -56,6 +56,8 @@ HEADERS  += MainWindow.h \
     srcTest/domain/functor/CapacidadeSalaFunctorTest.h \
     srcTest/util/MathUtilTest.h \
     srcTest/domain/alocacaoSala/SolucaoSaAlocacaoSalaTest.h \
-    src/domain/alocacaoSala/SolucaoSaAlocacaoSalaCompleta.h
+    src/domain/alocacaoSala/SolucaoSaAlocacaoSalaCompleta.h \
+    src/domain/functor/CodigoTurmaFunctor.h \
+    srcTest/domain/functor/CodigoTurmaFunctorTest.h
 
 FORMS    += MainWindow.ui
