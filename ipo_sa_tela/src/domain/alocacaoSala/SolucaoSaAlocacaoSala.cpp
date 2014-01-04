@@ -35,8 +35,11 @@ std::string SolucaoSaAlocacaoSala::toString()
 }
 
 void SolucaoSaAlocacaoSala::gerarMatrizInicial(){
-    m_matrizHorarioPorSala = std::vector< std::vector<int> >( QTDE_HORARIOS_DEFAULT );
-    for( int i = 0; i < QTDE_HORARIOS_DEFAULT; i++ ){
+
+    armazenarMaiorHorarioMatriz();
+
+    m_matrizHorarioPorSala = std::vector< std::vector<int> >( m_maiorHorarioTurmas );
+    for( int i = 0; i < m_maiorHorarioTurmas; i++ ){
         m_matrizHorarioPorSala[i] = std::vector<int>( m_listaSala.size(), -1 );
     }
 }
@@ -46,8 +49,6 @@ void SolucaoSaAlocacaoSala::gerarSolucaoInicial()
     gerarMatrizInicial();
 
     montarMatriz();
-
-    armazenarMaiorHorarioMatriz();
 }
 
 int SolucaoSaAlocacaoSala::getSalaVaziaComCapacidade( const Turma& turma ) const
