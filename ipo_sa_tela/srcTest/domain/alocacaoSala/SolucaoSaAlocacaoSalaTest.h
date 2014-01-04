@@ -203,6 +203,33 @@ void testeArmazenarMaiorHorarioMatrizOk(){
     assert( sa.maiorHorarioTurmas() == 3 );
 }
 
+void testeBuscarTurmaCodigoOk(){
+    SolucaoSaAlocacaoSala sa;
+
+    std::vector<Turma> vetorTurma;
+    Turma turma;
+    turma.setDemanda(50);
+    turma.setHorario( 0 );
+    turma.setCodigoTurma(0);
+    vetorTurma.push_back( turma );
+    turma.setDemanda(50);
+    turma.setHorario( 0 );
+    turma.setCodigoTurma(1);
+    vetorTurma.push_back( turma );
+    turma.setDemanda(50);
+    turma.setHorario( 3 );
+    turma.setCodigoTurma(2);
+    vetorTurma.push_back( turma );
+
+    sa.setListaTurma( vetorTurma );
+
+
+    Turma* temp = sa.buscarTurmaPorCodigo( 2 );
+
+    assert( temp->demanda() == 50 );
+    assert( temp->horario() == 3 );
+    assert( temp->codigoTurma() == 2 );
+}
 
 
 #endif // SOLUCAOSAALOCACAOSALATEST_H

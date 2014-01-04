@@ -41,6 +41,7 @@ void mainTestes(){
     testeMontarMatrizOk();
     testeGerarVizinhoSalaVirtualOk();
     testeArmazenarMaiorHorarioMatrizOk();
+    testeBuscarTurmaCodigoOk();
 
     // CodigoTurmaFunctorTest
     ordenaCoridgoTurmaCrescenteOK();

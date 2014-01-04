@@ -50,6 +50,10 @@ public:
 
     void gerarVizinhoPorRealocacao();
 
+    void ordenarTurmaPorCodigoParaGeracaoDeVizinho();
+
+    Turma *buscarTurmaPorCodigo( int codigoTurma );
+
 // metodos virtuais
 public:
     std::string toString();
