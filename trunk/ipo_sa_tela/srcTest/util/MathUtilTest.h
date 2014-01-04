@@ -14,4 +14,9 @@ void randomMaiorZeroMenorUm(){
     assert( rand < 1.0 );
 }
 
+void ramdomLimitadoZero(){
+    int rand = MathUtil::randomLimitado(0);
+    assert( rand == 0 );
+}
+
 #endif // MATHUTILTEST_H

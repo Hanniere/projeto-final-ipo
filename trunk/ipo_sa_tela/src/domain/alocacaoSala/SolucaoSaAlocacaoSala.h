@@ -5,6 +5,7 @@
 #include <src/domain/alocacaoSala/Sala.h>
 #include <vector>
 #include <list>
+#include <set>
 
 class SolucaoSaAlocacaoSala : public ISolucaoSa
 {
@@ -46,13 +47,15 @@ public:
 
     bool deveGerarVizinhoPelaTroca() const;
 
-    void gerarVizinhoPorTroca();
+    bool gerarVizinhoPorTroca();
 
     void gerarVizinhoPorRealocacao();
 
     void ordenarTurmaPorCodigoParaGeracaoDeVizinho();
 
     Turma *buscarTurmaPorCodigo( int codigoTurma );
+
+    void incializaSetDeSalas();
 
 // metodos virtuais
 public:
@@ -106,6 +109,9 @@ private:
 
     // vetor de turmas dessa solucao
     std::vector<Turma> m_listaTurma;
+
+    // set com as salas existente
+    std::set<int> m_setSalas;
 };
 
 #endif // SOLUCAOSAALOCACAOSALA_H

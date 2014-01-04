@@ -39,5 +39,8 @@ int MathUtil::random()
 int MathUtil::randomLimitado( int limite )
 {
     seed();
+    if( limite == 0 )
+        return 0;
+
     return rand() % limite;
 }

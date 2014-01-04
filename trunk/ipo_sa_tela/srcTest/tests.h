@@ -34,6 +34,7 @@ void mainTestes(){
     // MathUtilTest
     expZero();
     randomMaiorZeroMenorUm();
+    ramdomLimitadoZero();
 
     // SolucaoSaAlocacaoSalaTest
     testeGeraMatrizInicialOk();
