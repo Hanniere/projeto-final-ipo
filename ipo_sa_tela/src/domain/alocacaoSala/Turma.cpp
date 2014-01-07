@@ -1,7 +1,7 @@
 #include "Turma.h"
 
 Turma::Turma()
-    : m_codigoTurma( -1 ), m_demanda( -1 ), m_diaSemana( DIA_INVALIDO ), m_horario( -1 )
+    : m_codigoTurma( -1 ), m_demanda( -1 ), m_diaSemana( DIA_INVALIDO ), m_horario( -1 ), m_descricaoMateria("")
 {
 }
 
@@ -61,4 +61,14 @@ int Turma::codigoTurma() const
 void Turma::setCodigoTurma(int codigoTurma)
 {
     m_codigoTurma = codigoTurma;
+}
+
+std::string Turma::descricaoMateria() const
+{
+    return m_descricaoMateria;
+}
+
+void Turma::setDescricaoMateria(const std::string &descricaoMateria)
+{
+    m_descricaoMateria = descricaoMateria;
 }

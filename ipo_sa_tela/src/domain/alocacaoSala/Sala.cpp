@@ -38,3 +38,13 @@ void Sala::setCodigoSala(int codigoSala)
 {
     m_codigoSala = codigoSala;
 }
+
+std::string Sala::descricaoSala() const
+{
+    return m_descricaoSala;
+}
+
+void Sala::setDescricaoSala(const std::string &descricaoSala)
+{
+    m_descricaoSala = descricaoSala;
+}

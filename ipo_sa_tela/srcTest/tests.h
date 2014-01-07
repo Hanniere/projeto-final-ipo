@@ -14,7 +14,7 @@ void mainTestes(){
     // ParserSimulatedAnnelingAlocacaoSalaArquivoTest
     parseDadosEntradaArquivoTxtOk();
     parseDadosEntradaArquivoTxtNOkDiaInvalido();
-    parseDadosEntradaArquivoTxtNOkDiaMAiorDomingo();
+    parseDadosEntradaArquivoTxtNOkDiaMaiorDomingo();
 
     // SimulatedAnnelingFactoryTest
     instanciaSimulatedAnnelingAlocacaoSalaOk();

@@ -19,6 +19,9 @@ public:
     std::vector<Turma> listaTurma() const;
     void setListaTurma(const std::vector<Turma> &listaTurma);
 
+    std::string descricaoSala() const;
+    void setDescricaoSala(const std::string &descricaoSala);
+
 private:
     // codigo referente a sala
     int m_codigoSala;
@@ -29,8 +32,7 @@ private:
     // lista de turmas associadas a essa sala
     std::vector<Turma> m_listaTurma;
 
-    // valor da funcao objetivo
-    //int m_valorFuncaoObj;
+    std::string m_descricaoSala;
 };
 
 #endif // SALA_H

@@ -2,6 +2,7 @@
 #define TURMA_H
 
 #include <src/enum/DiaSemana.h>
+#include <string>
 
 class Turma
 {
@@ -23,6 +24,9 @@ public:
     int codigoTurma() const;
     void setCodigoTurma(int codigoTurma);
 
+    std::string descricaoMateria() const;
+    void setDescricaoMateria(const std::string &descricaoMateria);
+
 private:
     // codigo da turma
     int m_codigoTurma;
@@ -35,6 +39,8 @@ private:
 
     // campo dinamico, representa horario, exemplo: 1 = 07:00, 2 = 07:50, 3 = 08:40
     int m_horario;
+
+    std::string m_descricaoMateria;
 };
 
 #endif // TURMA_H
