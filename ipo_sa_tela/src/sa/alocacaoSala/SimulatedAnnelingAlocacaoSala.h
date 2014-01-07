@@ -24,9 +24,9 @@ public:
 
 // virtual
 public:
-    ISolucaoSa* gerarSolucaoInicial() const;
     ISolucaoSa*simulatedAnneling();
     ISolucaoSa* alocaSolucao() const;
+    void clear();
 
 private:
     IParserSimulatedAnnelingAlocacaoSala* m_parser;

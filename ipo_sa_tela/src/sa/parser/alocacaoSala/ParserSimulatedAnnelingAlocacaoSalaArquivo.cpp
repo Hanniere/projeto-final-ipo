@@ -1,3 +1,4 @@
+
 #include "ParserSimulatedAnnelingAlocacaoSalaArquivo.h"
 
 #include <fstream>

@@ -5,6 +5,8 @@
 #include<src/sa/alocacaoSala/SimulatedAnnelingAlocacaoSala.h>
 #include<src/sa/factory/SimulatedAnnelingFactory.h>
 
+#include <iostream>
+
 MainController::MainController()
 {
     // simulalted anneling default
@@ -19,6 +21,18 @@ MainController::~MainController()
 bool MainController::carregarDadosEntrada(const std::string &nomeArquivo)
 {
     return m_simulatedAnneling->carregarDadosEntrada( nomeArquivo  );
+}
+
+void MainController::clear()
+{
+    m_simulatedAnneling->clear();
+}
+
+void MainController::executar()
+{
+    ISolucaoSa* solucao = m_simulatedAnneling->simulatedAnneling();
+
+    std::cout << solucao->toString() << std::endl;
 }
 
 void MainController::setTipoSimulatedAnneling(std::string tipoSa)

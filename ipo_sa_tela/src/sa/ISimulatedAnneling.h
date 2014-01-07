@@ -28,7 +28,7 @@ public:
 public:
     virtual ISolucaoSa* alocaSolucao() const = 0;
 
-    virtual ISolucaoSa* gerarSolucaoInicial() const = 0;
+    virtual void clear() = 0;
 
 protected:
     // numero de iteracoes na temperatura

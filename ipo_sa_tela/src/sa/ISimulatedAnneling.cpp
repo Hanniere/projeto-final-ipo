@@ -1,7 +1,6 @@
 #include "ISimulatedAnneling.h"
 #include <src/domain/ISolucaoSa.h>
 #include <src/util/MathUtil.h>
-#include <cstring> // memcpy
 
 ISimulatedAnneling::ISimulatedAnneling()
     : m_numeroIteracoes( -1 ), m_taxaResfriamento( 0.0f ), m_temperaturaInicial( 0 )
@@ -22,7 +21,7 @@ ISolucaoSa *ISimulatedAnneling::simulatedAnneling( ISolucaoSa* solucaoAtual )
     int numeroIteracoesAtual = 0;
     float temperatura = m_temperaturaInicial;
 
-    while( temperatura > 0 ){
+    while( temperatura > 0.01f ){
         while( numeroIteracoesAtual < m_numeroIteracoes ){
             numeroIteracoesAtual++;
 
@@ -44,9 +43,13 @@ ISolucaoSa *ISimulatedAnneling::simulatedAnneling( ISolucaoSa* solucaoAtual )
                 }
             }
             else {//if( ){
-                double x = MathUtil::randomEntre0e1();
-                if( x < MathUtil::potenciaBaseNeperianda( -delta/temperatura ) )
-                   solucaoAtual->copia( *vizinho );
+
+                if( delta != 0 )
+                {
+                    double x = MathUtil::randomEntre0e1();
+                    if( x < MathUtil::potenciaBaseNeperianda( -delta/temperatura ) )
+                       solucaoAtual->copia( *vizinho );
+                }
             }
         }
 
