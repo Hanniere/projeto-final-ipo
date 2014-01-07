@@ -12,6 +12,8 @@ public:
     virtual ~MainController();
     bool carregarDadosEntrada( const std::string& nomeArquivo );
     void setTipoSimulatedAnneling(std::string tipoSa );
+    void clear();
+    void executar();
 
 private:
     ISimulatedAnneling* m_simulatedAnneling;

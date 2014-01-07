@@ -1,12 +1,11 @@
 #include "SolucaoSaAlocacaoSalaCompleta.h"
 
-#include <cstring>
 #include <cassert>
 
 SolucaoSaAlocacaoSalaCompleta::SolucaoSaAlocacaoSalaCompleta()
 {
-    m_turmaPorDia = std::vector< std::vector<Turma> >( DOMINGO -1 );
-    m_solucoes = std::vector< ISolucaoSa* >( DOMINGO -1 );
+    m_turmaPorDia = std::vector< std::vector<Turma> >( DOMINGO );
+    m_solucoes = std::vector< ISolucaoSa* >( DOMINGO );
 }
 
 void SolucaoSaAlocacaoSalaCompleta::addSala(const Sala &sala)
@@ -16,7 +15,7 @@ void SolucaoSaAlocacaoSalaCompleta::addSala(const Sala &sala)
 
 void SolucaoSaAlocacaoSalaCompleta::addTumarNoDia(const Turma &turma, const DiaSemana &dia)
 {
-    m_turmaPorDia[dia-1].push_back( turma );
+  m_turmaPorDia.at(dia-1).push_back( turma );
 }
 
 std::vector<Turma> SolucaoSaAlocacaoSalaCompleta::getTurmasDia(const DiaSemana &dia) const
@@ -41,14 +40,21 @@ void SolucaoSaAlocacaoSalaCompleta::addSolucaoNoDia(ISolucaoSa *solucao, const D
 
 std::string SolucaoSaAlocacaoSalaCompleta::toString()
 {
-    assert( 0 );
+    std::string retorno;
+    for( unsigned int i = 0; i < m_solucoes.size(); ++i ){
+        ISolucaoSa* temp = m_solucoes.at(i);
+        if( temp != 0 ){
+            retorno.append( temp->toString() );
+            retorno.append( "\n" );
+        }
+    }
+
+    return retorno;
 }
 
 void SolucaoSaAlocacaoSalaCompleta::clear()
 {
-    m_listaSala.clear();
-    m_turmaPorDia.clear();
-    m_solucoes.clear();
+    *this = SolucaoSaAlocacaoSalaCompleta();
 }
 
 int SolucaoSaAlocacaoSalaCompleta::tamanhoSolucaoSa() const
@@ -63,7 +69,8 @@ ISolucaoSa *SolucaoSaAlocacaoSalaCompleta::gerarVizinho() const
 
 void SolucaoSaAlocacaoSalaCompleta::copia(const ISolucaoSa &solucao)
 {
-    memcpy( this, &solucao, sizeof( SolucaoSaAlocacaoSalaCompleta ) );
+    SolucaoSaAlocacaoSalaCompleta* temp = (SolucaoSaAlocacaoSalaCompleta*) &solucao;
+    *this = *temp;
 }
 
 long SolucaoSaAlocacaoSalaCompleta::gerarCusto()
@@ -75,5 +82,3 @@ long SolucaoSaAlocacaoSalaCompleta::gerarCusto()
 
     return m_custo;
 }
-
-

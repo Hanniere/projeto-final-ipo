@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QString>
+#include <src/controller/MainController.h>
 
 namespace Ui {
 class MainWindow;
@@ -24,6 +25,7 @@ private:
     Ui::MainWindow *ui;
 
     QString m_nomeArquivo;
+    MainController m_mainController;
 };
 
 #endif // MAINWINDOW_H

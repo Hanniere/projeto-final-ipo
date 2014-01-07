@@ -48,22 +48,38 @@ bool SimulatedAnnelingAlocacaoSala::carregarDadosEntrada(const std::string &nome
     return false;
 }
 
-ISolucaoSa *SimulatedAnnelingAlocacaoSala::gerarSolucaoInicial() const
-{
-    SolucaoSaAlocacaoSala* solucao = new SolucaoSaAlocacaoSala();
-
-    solucao->setListaSala( m_solucaoSaAlocacaoSalaCompleta.listaSala() );
-
-    return solucao;
-}
-
 ISolucaoSa *SimulatedAnnelingAlocacaoSala::simulatedAnneling()
 {
     // varrer a SolucaoCompleta gerando um solucaoInicial para cada dia
-    return 0;
+    for( int i = SEGUNDA_FEIRA; i < DOMINGO; i++ ){
+
+        if( m_solucaoSaAlocacaoSalaCompleta.getTurmasDia( (DiaSemana) i ).size() == 0 )
+            m_solucaoSaAlocacaoSalaCompleta.addSolucaoNoDia( 0, (DiaSemana) i );
+        else
+        {
+            SolucaoSaAlocacaoSala* solucao = new SolucaoSaAlocacaoSala();
+            solucao->setListaSala( m_solucaoSaAlocacaoSalaCompleta.listaSala() );
+            solucao->setListaTurma( m_solucaoSaAlocacaoSalaCompleta.getTurmasDia( (DiaSemana) i ));
+            solucao->gerarSolucaoInicial();
+
+            m_solucaoSaAlocacaoSalaCompleta.addSolucaoNoDia( ISimulatedAnneling::simulatedAnneling( solucao ), (DiaSemana) i );
+
+            delete solucao;
+        }
+    }
+
+    return new SolucaoSaAlocacaoSalaCompleta( m_solucaoSaAlocacaoSalaCompleta );
 }
 
 ISolucaoSa *SimulatedAnnelingAlocacaoSala::alocaSolucao() const
 {
     return new SolucaoSaAlocacaoSala();
+}
+
+void SimulatedAnnelingAlocacaoSala::clear()
+{
+    m_parser->clear();
+    m_vetorSala.clear();
+    m_vetorTurma.clear();
+    m_solucaoSaAlocacaoSalaCompleta.clear();
 }

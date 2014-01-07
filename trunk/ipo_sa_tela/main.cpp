@@ -1,7 +1,7 @@
 #include "MainWindow.h"
 #include <QApplication>
 
-#define TESTES
+//#define TESTES
 
 #ifdef TESTES
 #include <srcTest/tests.h>
