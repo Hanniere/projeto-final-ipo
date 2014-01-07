@@ -58,6 +58,10 @@ std::string SolucaoSaAlocacaoSala::toString()
         retorno << "Dia Semana Turma: ";
         retorno << (*it).diaSemana();
         retorno << std::endl;
+
+        retorno << "Materia Turma: ";
+        retorno << (*it).descricaoMateria();
+        retorno << std::endl;
         retorno << std::endl;
     }
 
@@ -71,6 +75,10 @@ std::string SolucaoSaAlocacaoSala::toString()
 
         retorno << "Capacidade Sala: ";
         retorno << m_listaSala.at(i).capacidade();
+        retorno << std::endl;
+
+        retorno << "Descricao Sala: ";
+        retorno << m_listaSala.at(i).descricaoSala();
         retorno << std::endl;
 
         for( unsigned int j = 0; j < m_matrizHorarioPorSala.size(); ++j ){
@@ -92,6 +100,10 @@ std::string SolucaoSaAlocacaoSala::toString()
 
                 retorno << "Dia Semana Turma: ";
                 retorno << turma->diaSemana();
+                retorno << std::endl;
+
+                retorno << "Materia Turma: ";
+                retorno << turma->descricaoMateria();
                 retorno << std::endl;
             }
 

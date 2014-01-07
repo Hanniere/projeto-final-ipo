@@ -26,9 +26,11 @@ bool ParserSimulatedAnnelingAlocacaoSalaArquivo::parse(const std::string &entrad
         for( int i =0; i < qtdeSala; i++ ){
             Sala sala;
             int capacidade;
-            arquivo >> capacidade;
+            std::string descricaoSala;
+            arquivo >> capacidade >> descricaoSala;
             sala.setCapacidade( capacidade );
             sala.setCodigoSala( i );
+            sala.setDescricaoSala( descricaoSala );
             m_vetorSala[i] = sala;
         }
 
@@ -43,7 +45,8 @@ bool ParserSimulatedAnnelingAlocacaoSalaArquivo::parse(const std::string &entrad
             int demanda;
             int horario;
             int diaSemana;
-            arquivo >> demanda >> horario >> diaSemana;
+            std::string descricaoMateria;
+            arquivo >> demanda >> horario >> diaSemana >> descricaoMateria;
 
             if( diaSemana > DOMINGO || diaSemana == DIA_INVALIDO )
                 return false;
@@ -52,9 +55,9 @@ bool ParserSimulatedAnnelingAlocacaoSalaArquivo::parse(const std::string &entrad
             turma.setCodigoTurma( i );
             turma.setDemanda( demanda );
             turma.setHorario( horario );
+            turma.setDescricaoMateria( descricaoMateria );
 
-            m_vetorTurma[i]
-                    = turma;
+            m_vetorTurma[i] = turma;
         }
         return true;
     }

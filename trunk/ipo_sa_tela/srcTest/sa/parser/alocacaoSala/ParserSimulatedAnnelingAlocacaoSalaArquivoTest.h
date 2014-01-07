@@ -12,19 +12,19 @@ void parseDadosEntradaArquivoTxtOk(){
          // quantide de salas
         arquivoSaida << 2 << std::endl;
         // capacidade 1
-        arquivoSaida << 50 << std::endl;
+        arquivoSaida << 50 << " " << "sala1" << std::endl;
         //capacidade 2
-        arquivoSaida << 90 << std::endl;
+        arquivoSaida << 90 << " " << "sala_temporaria" << std::endl;
 
         // quantide turma
         arquivoSaida << 3 << std::endl;
 
         // turma 1
-        arquivoSaida << 50 << " " << 1 << " " << 1 << std::endl;
+        arquivoSaida << 50 << " " << 1 << " " << 1 << " " << "IPO" << std::endl;
         // turma 2
-        arquivoSaida << 60 << " " << 1 << " " << 1 << std::endl;
+        arquivoSaida << 60 << " " << 1 << " " << 1 << " " << "LMA" << std::endl;
         // turma 3
-        arquivoSaida << 30 << " " << 2 << " " << 1 << std::endl;
+        arquivoSaida << 30 << " " << 2 << " " << 1 << " " << "TCCII" << std::endl;
 
         arquivoSaida.close();
 
@@ -36,10 +36,12 @@ void parseDadosEntradaArquivoTxtOk(){
             Sala tempSala = vetorSala.at(0);
             assert( tempSala.capacidade() == 50 );
             assert( tempSala.codigoSala() == 0 );
+            assert( tempSala.descricaoSala() =="sala1" );
 
             tempSala = vetorSala.at(1);
             assert( tempSala.capacidade() == 90 );
             assert( tempSala.codigoSala() == 1 );
+            assert( tempSala.descricaoSala() =="sala_temporaria" );
 
             std::vector<Turma> vetorTurma = parser.vetorTurma();
 
@@ -49,18 +51,21 @@ void parseDadosEntradaArquivoTxtOk(){
             assert( tempTurma.codigoTurma() == 0 );
             assert( tempTurma.diaSemana() == SEGUNDA_FEIRA );
             assert( tempTurma.horario() == 1 );
+            assert( tempTurma.descricaoMateria() == "IPO" );
 
             tempTurma = vetorTurma.at(1);
             assert( tempTurma.demanda() == 60 );
             assert( tempTurma.codigoTurma() == 1 );
             assert( tempTurma.diaSemana() == SEGUNDA_FEIRA );
             assert( tempTurma.horario() == 1 );
+            assert( tempTurma.descricaoMateria() == "LMA" );
 
             tempTurma = vetorTurma.at(2);
             assert( tempTurma.demanda() == 30 );
             assert( tempTurma.codigoTurma() == 2 );
             assert( tempTurma.diaSemana() == SEGUNDA_FEIRA );
             assert( tempTurma.horario() == 2 );
+            assert( tempTurma.descricaoMateria() == "TCCII" );
         }
         else
             assert( 0 );
@@ -96,7 +101,7 @@ void parseDadosEntradaArquivoTxtNOkDiaInvalido(){
         assert(0);
 }
 
-void parseDadosEntradaArquivoTxtNOkDiaMAiorDomingo(){
+void parseDadosEntradaArquivoTxtNOkDiaMaiorDomingo(){
     std::ofstream arquivoSaida("temp.txt", std::ios_base::out );
 
     if( arquivoSaida.is_open() ){
