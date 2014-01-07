@@ -11,7 +11,6 @@ ParserSimulatedAnnelingAlocacaoSalaArquivo::~ParserSimulatedAnnelingAlocacaoSala
 {
 }
 
-
 bool ParserSimulatedAnnelingAlocacaoSalaArquivo::parse(const std::string &entrada)
 {
     std::ifstream arquivo(entrada.c_str(), std::ios_base::in);
@@ -20,7 +19,7 @@ bool ParserSimulatedAnnelingAlocacaoSalaArquivo::parse(const std::string &entrad
 
         // Salas
         int qtdeSala;
-        arquivo >> qtdeSala;
+        arquivo >> qtdeSala;        
 
         m_vetorSala = std::vector<Sala>( qtdeSala );
 
@@ -54,7 +53,8 @@ bool ParserSimulatedAnnelingAlocacaoSalaArquivo::parse(const std::string &entrad
             turma.setDemanda( demanda );
             turma.setHorario( horario );
 
-            m_vetorTurma[i] = turma;
+            m_vetorTurma[i]
+                    = turma;
         }
         return true;
     }

@@ -1,6 +1,6 @@
 #include "SolucaoSaAlocacaoSalaCompleta.h"
 
-#include <cassert>
+#include <sstream>
 
 SolucaoSaAlocacaoSalaCompleta::SolucaoSaAlocacaoSalaCompleta()
 {
@@ -40,16 +40,19 @@ void SolucaoSaAlocacaoSalaCompleta::addSolucaoNoDia(ISolucaoSa *solucao, const D
 
 std::string SolucaoSaAlocacaoSalaCompleta::toString()
 {
-    std::string retorno;
+    std::ostringstream retorno;
     for( unsigned int i = 0; i < m_solucoes.size(); ++i ){
         ISolucaoSa* temp = m_solucoes.at(i);
-        if( temp != 0 ){
-            retorno.append( temp->toString() );
-            retorno.append( "\n" );
+        if( temp->tempoExecucao() != 0 ){
+            retorno << "Tempo Execucao: ";
+            retorno << temp->tempoExecucao();
+            retorno << std::endl;
+            retorno << std::endl;
+            retorno << temp->toString();
         }
     }
 
-    return retorno;
+    return retorno.str();
 }
 
 void SolucaoSaAlocacaoSalaCompleta::clear()

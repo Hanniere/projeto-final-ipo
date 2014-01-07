@@ -30,8 +30,13 @@ public:
     // calcula o custo e retorna o valor calculado
     virtual long int gerarCusto() = 0;
 
+    float tempoExecucao() const;
+    void setTempoExecucao(float tempoExecucao);
+
 protected:
     long int m_custo;
+
+    float m_tempoExecucao;
 };
 
 #endif // ISOLUCAOSA_H

@@ -3,8 +3,7 @@
 #include<string>
 #include<src/sa/parser/alocacaoSala/ParserSimulatedAnnelingAlocacaoSalaArquivo.h>
 #include <src/domain/alocacaoSala/SolucaoSaAlocacaoSala.h>
-
-#include<cassert>
+#include <ctime>
 
 SimulatedAnnelingAlocacaoSala::SimulatedAnnelingAlocacaoSala()
     : m_parser( new ParserSimulatedAnnelingAlocacaoSalaArquivo() )
@@ -51,18 +50,22 @@ bool SimulatedAnnelingAlocacaoSala::carregarDadosEntrada(const std::string &nome
 ISolucaoSa *SimulatedAnnelingAlocacaoSala::simulatedAnneling()
 {
     // varrer a SolucaoCompleta gerando um solucaoInicial para cada dia
-    for( int i = SEGUNDA_FEIRA; i < DOMINGO; i++ ){
+    for( int i = SEGUNDA_FEIRA; i <= DOMINGO; i++ ){
 
         if( m_solucaoSaAlocacaoSalaCompleta.getTurmasDia( (DiaSemana) i ).size() == 0 )
-            m_solucaoSaAlocacaoSalaCompleta.addSolucaoNoDia( 0, (DiaSemana) i );
+            m_solucaoSaAlocacaoSalaCompleta.addSolucaoNoDia( new SolucaoSaAlocacaoSala(), (DiaSemana) i );
         else
         {
+            const clock_t inicio = clock();
+
             SolucaoSaAlocacaoSala* solucao = new SolucaoSaAlocacaoSala();
             solucao->setListaSala( m_solucaoSaAlocacaoSalaCompleta.listaSala() );
             solucao->setListaTurma( m_solucaoSaAlocacaoSalaCompleta.getTurmasDia( (DiaSemana) i ));
             solucao->gerarSolucaoInicial();
 
-            m_solucaoSaAlocacaoSalaCompleta.addSolucaoNoDia( ISimulatedAnneling::simulatedAnneling( solucao ), (DiaSemana) i );
+            SolucaoSaAlocacaoSala* temp = (SolucaoSaAlocacaoSala*)ISimulatedAnneling::simulatedAnneling( solucao );
+            temp->setTempoExecucao( float( clock () - inicio ) /  CLOCKS_PER_SEC );
+            m_solucaoSaAlocacaoSalaCompleta.addSolucaoNoDia( temp, (DiaSemana) i );
 
             delete solucao;
         }
