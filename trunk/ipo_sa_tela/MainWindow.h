@@ -21,10 +21,11 @@ private slots:
 
     void on_pb_selecionar_arquivo_entrada_clicked();
 
+    void on_pb_executar_clicked();
+
 private:
     Ui::MainWindow *ui;
 
-    QString m_nomeArquivo;
     MainController m_mainController;
 };
 

@@ -5,8 +5,6 @@
 #include<src/sa/alocacaoSala/SimulatedAnnelingAlocacaoSala.h>
 #include<src/sa/factory/SimulatedAnnelingFactory.h>
 
-#include <iostream>
-
 MainController::MainController()
 {
     // simulalted anneling default
@@ -28,11 +26,11 @@ void MainController::clear()
     m_simulatedAnneling->clear();
 }
 
-void MainController::executar()
+std::string MainController::executar()
 {
     ISolucaoSa* solucao = m_simulatedAnneling->simulatedAnneling();
 
-    std::cout << solucao->toString() << std::endl;
+    return solucao->toString();
 }
 
 void MainController::setTipoSimulatedAnneling(std::string tipoSa)
@@ -40,4 +38,46 @@ void MainController::setTipoSimulatedAnneling(std::string tipoSa)
     std::transform(tipoSa.begin(), tipoSa.end(), tipoSa.begin(), ::tolower);
     if( tipoSa == "alocacao sala")
         m_simulatedAnneling =  SimulatedAnnelingFactory::getInstance()->getSimulatedAnneling( ALOCACAO_SALAS );
+}
+
+int MainController::numeroIteracoes() const
+{
+    if( m_simulatedAnneling != 0 )
+        return m_simulatedAnneling->numeroIteracoes();
+    else
+        return -1;
+}
+
+void MainController::setNumeroIteracoes(int numeroIteracoes)
+{
+    if( m_simulatedAnneling != 0 )
+        m_simulatedAnneling->setNumeroIteracoes( numeroIteracoes );
+}
+
+float MainController::temperaturaInicial() const
+{
+    if( m_simulatedAnneling != 0 )
+        return m_simulatedAnneling->temperaturaInicial();
+    else
+        return -1;
+}
+
+void MainController::setTemperaturaInicial(float temperaturaInicial)
+{
+    if( m_simulatedAnneling != 0 )
+        m_simulatedAnneling->setTemperaturaInicial( temperaturaInicial );
+}
+
+float MainController::taxaResfriamento() const
+{
+    if( m_simulatedAnneling != 0 )
+        return m_simulatedAnneling->taxaResfriamento();
+    else
+        return -1;
+}
+
+void MainController::setTaxaResfriamento(float taxaResfriamento)
+{
+    if( m_simulatedAnneling != 0 )
+        m_simulatedAnneling->setTaxaResfriamento( taxaResfriamento );
 }

@@ -13,7 +13,16 @@ public:
     bool carregarDadosEntrada( const std::string& nomeArquivo );
     void setTipoSimulatedAnneling(std::string tipoSa );
     void clear();
-    void executar();
+    std::string executar();
+
+    int numeroIteracoes() const;
+    void setNumeroIteracoes(int numeroIteracoes);
+
+    float temperaturaInicial() const;
+    void setTemperaturaInicial(float temperaturaInicial);
+
+    float taxaResfriamento() const;
+    void setTaxaResfriamento(float taxaResfriamento);
 
 private:
     ISimulatedAnneling* m_simulatedAnneling;

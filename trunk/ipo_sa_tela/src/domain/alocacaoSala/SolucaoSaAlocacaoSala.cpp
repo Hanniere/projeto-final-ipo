@@ -93,7 +93,6 @@ std::string SolucaoSaAlocacaoSala::toString()
                 retorno << "Dia Semana Turma: ";
                 retorno << turma->diaSemana();
                 retorno << std::endl;
-                retorno << std::endl;
             }
 
             retorno << std::endl;
