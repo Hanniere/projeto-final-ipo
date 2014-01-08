@@ -42,14 +42,10 @@ ISolucaoSa *ISimulatedAnneling::simulatedAnneling( ISolucaoSa* solucaoAtual )
                     melhorSolucao->copia( *solucaoAtual );
                 }
             }
-            else {//if( ){
-
-                //if( delta != 0 )
-                {
-                    double x = MathUtil::randomEntre0e1();
-                    if( x < MathUtil::potenciaBaseNeperianda( -delta/temperatura ) )
-                       melhorSolucao->copia( *vizinho );//solucaoAtual->copia( *vizinho );
-                }
+            else {
+                double x = MathUtil::randomEntre0e1();
+                if( x < MathUtil::potenciaBaseNeperianda( -delta/temperatura ) )
+                   solucaoAtual->copia( *vizinho );
             }
         }
 
