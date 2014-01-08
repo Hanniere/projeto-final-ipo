@@ -118,8 +118,8 @@ void SolucaoSaAlocacaoSala::gerarMatrizInicial(){
 
     armazenarMaiorHorarioMatriz();
 
-    m_matrizHorarioPorSala = std::vector< std::vector<int> >( m_maiorHorarioTurmas +1 );
-    for( int i = 0; i <= m_maiorHorarioTurmas; i++ ){
+    m_matrizHorarioPorSala = std::vector< std::vector<int> >( m_maiorHorarioTurmas );
+    for( int i = 0; i < m_maiorHorarioTurmas; ++i ){
         m_matrizHorarioPorSala[i] = std::vector<int>( m_listaSala.size(), -1 );
     }
 }
@@ -137,7 +137,7 @@ void SolucaoSaAlocacaoSala::gerarSolucaoInicial()
 
 int SolucaoSaAlocacaoSala::getSalaVaziaComCapacidade( const Turma& turma ) const
 {
-    for( unsigned int i = 0; i < m_listaSala.size(); i++ ){
+    for( unsigned int i = 0; i < m_listaSala.size(); ++i ){
 
         if( m_listaSala[i].capacidade() >= turma.demanda() ){
             if( m_matrizHorarioPorSala[ turma.horario() ][i] == -1 )
@@ -157,22 +157,25 @@ void SolucaoSaAlocacaoSala::montarMatriz()
 {
     m_qtdeSalaVirtual = 0;
 
-    std::sort( m_listaTurma.begin(), m_listaTurma.end(),
-               DemandaTurmaDecrescenteFunctor() );
-
-    std::sort( m_listaSala.begin(), m_listaSala.end(),
-               CapacidadeSalaDecrescenteFunctor() );
-
     // varre turmas
     for( std::vector<Turma>::const_iterator it = m_listaTurma.begin(), end = m_listaTurma.end();
          it != end; ++it ){
 
-        int salaVazia =  getSalaVaziaComCapacidade( *it );
-        if( salaVazia != -1 ) {
-            m_matrizHorarioPorSala[ (*it).horario() ][salaVazia] = (*it).codigoTurma();
+        int salaRandom = MathUtil::randomLimitado( m_listaSala.size() ); //getSalaVaziaComCapacidade( *it );
+
+        // se nao tiver ocupad
+        if( m_matrizHorarioPorSala[ (*it).horario() ][salaRandom] == -1 ){
+            if( m_listaSala.at( salaRandom ).capacidade() >= -(*it).demanda() ) {
+                m_matrizHorarioPorSala[ (*it).horario() ][salaRandom] = (*it).codigoTurma();
+            }
+            else{
+                ++m_qtdeSalaVirtual;
+                // adiciona na lista de turmas sem sala
+                m_turmasSalaVirtual.push_back( *it );
+            }
         }
         else{
-            m_qtdeSalaVirtual++;
+            ++m_qtdeSalaVirtual;
             // adiciona na lista de turmas sem sala
             m_turmasSalaVirtual.push_back( *it );
         }
@@ -181,36 +184,122 @@ void SolucaoSaAlocacaoSala::montarMatriz()
 
 bool SolucaoSaAlocacaoSala::gerarVizinhoPorSalaVirtual()
 {
-    if( qtdeSalaVirtual() > 0 ){
+    if( m_qtdeSalaVirtual > 0 ){
 
-        // adiciona turma da sala virtual a solucao
-        for( std::list<Turma>::const_iterator it = m_turmasSalaVirtual.begin(), end = m_turmasSalaVirtual.end();
-             it != end; ++it ){
-
-            int salaVazia =  getSalaVaziaComCapacidade( *it );
-            if( salaVazia != -1 ) {
-                m_matrizHorarioPorSala[ (*it).horario() ][salaVazia] = (*it).codigoTurma();
-
-                m_qtdeSalaVirtual--;
-                // adiciona na lista de turmas sem sala
-                m_turmasSalaVirtual.remove( *it );
-
+        if( adicionaTurmaDeSalaVirtual() == true )
                 return true;
-            }
+        else
+            return trocaPorTurmaDeSalaVirtual();
+    }
+
+    return false;
+}
+
+bool SolucaoSaAlocacaoSala::adicionaTurmaDeSalaVirtual()
+{
+    // adiciona turma da sala virtual a solucao - tranformar em random
+    for( std::list<Turma>::const_iterator it = m_turmasSalaVirtual.begin(), end = m_turmasSalaVirtual.end();
+         it != end; ++it ){
+
+        int salaVazia =  getSalaVaziaComCapacidade( *it );
+        if( salaVazia != -1 ) {
+            m_matrizHorarioPorSala[ (*it).horario() ][salaVazia] = (*it).codigoTurma();
+
+            m_qtdeSalaVirtual--;
+            // adiciona na lista de turmas sem sala
+            m_turmasSalaVirtual.remove( *it );
+
+            return true;
         }
     }
 
     return false;
 }
 
+bool SolucaoSaAlocacaoSala::trocaPorTurmaDeSalaVirtual()
+{
+    bool retorno = false;
+    /*
+     * pega uma turma da sala virtual de forma randomica para tentar trocar
+     * com uma turma ja alocada
+     **/
+    int turmaVirtualRandom = MathUtil::randomLimitado( m_turmasSalaVirtual.size() );
+    std::list<Turma>::const_iterator it = m_turmasSalaVirtual.begin();
+
+    for( int i = 0; i < turmaVirtualRandom; ++i ){
+        ++it;
+    }
+
+    Turma turma1 = *it;
+
+    /*
+     * procurar uma sala ocupada no mesmo horario que caiba essa turma
+     *e a que for substituida caiba na turma acima
+     */
+
+    std::set<int> setSalatTemp = m_setSalas;
+    std::set<int>::iterator itSet;
+    // limita o indice randomico a ser utilizado na geracao do vizinho
+    int indiceMaxSala = setSalatTemp.size();
+    int salaTurma2;
+
+    do{
+        salaTurma2 = MathUtil::randomLimitado( indiceMaxSala );
+
+        itSet = getIteratorDoInteiroNoSet( setSalatTemp, salaTurma2 );
+
+        // se a capacidade for menor elimina os elementos em sequencia, pois esta ordenado
+        if( m_listaSala.at( *itSet ).capacidade() < turma1.demanda() ){
+            //setSalatTemp.erase( itSet, setSalatTemp.end() );
+            setSalatTemp.erase( *itSet );
+        }
+        else{
+            int temp = m_matrizHorarioPorSala.at(turma1.horario()).at( *itSet );
+            if( temp == -1 ){
+                // remove do set, pois so podemos fazer troca
+                setSalatTemp.erase( *itSet );
+            }else{
+                // realiza a troca, caso a turma1 tenha maior demanda que a turma2
+                Turma* turma2 = buscarTurmaPorCodigo( temp );
+
+                if( turma1.demanda() >= turma2->demanda() ){
+                    // posicao turma2 com codigo da turma1
+                    m_matrizHorarioPorSala.at(turma1.horario()).at( *itSet ) =
+                             turma1.codigoTurma();
+
+                    retorno = true;
+
+                    // coloca turma2 na lista de sala virtual e a turma1 eh removida
+                    m_turmasSalaVirtual.remove( *it );
+                    m_turmasSalaVirtual.push_back( *turma2 );
+
+                    break;
+                }
+                else{
+                    // remove do set, pois a troca nao eh possivel ja que a turma dois nao cabee na atual sala da turma1
+                    setSalatTemp.erase( *itSet );
+                }
+            }
+        }
+
+        indiceMaxSala = setSalatTemp.size();
+
+    }while( indiceMaxSala > 0 );
+
+    return retorno;
+}
+
 void SolucaoSaAlocacaoSala::armazenarMaiorHorarioMatriz()
 {
     m_maiorHorarioTurmas = -1;
-    for( unsigned int i = 0; i < m_listaTurma.size(); i++ ){
+    for( unsigned int i = 0; i < m_listaTurma.size(); ++i ){
         int temp = m_listaTurma.at(i).horario();
         if( temp > m_maiorHorarioTurmas )
             m_maiorHorarioTurmas = temp;
     }
+
+    // pois os horarios comecam em zero
+    ++m_maiorHorarioTurmas;
 }
 
 bool SolucaoSaAlocacaoSala::deveGerarVizinhoPelaTroca() const
@@ -268,7 +357,7 @@ bool SolucaoSaAlocacaoSala::gerarVizinhoPorTroca()
                 setSalatTemp.erase( *itSet );
             }
             else{
-                int temp = m_matrizHorarioPorSala.at(horarioTurma).at( salaTurma2 );
+                int temp = m_matrizHorarioPorSala.at(horarioTurma).at( *itSet );
                 if( temp == -1 ){
                     // remove do set, pois so podemos fazer troca
                     setSalatTemp.erase( *itSet );
@@ -278,7 +367,7 @@ bool SolucaoSaAlocacaoSala::gerarVizinhoPorTroca()
                     // pego a sala de turma1 e vejo se turma2 cabe
                     if( m_listaSala.at( salaTurma1 ).capacidade() >= turma2->demanda() ){
                         // pode trocar
-                        m_matrizHorarioPorSala.at(horarioTurma).at( salaTurma2 ) =
+                        m_matrizHorarioPorSala.at(horarioTurma).at( *itSet ) =
                                  m_matrizHorarioPorSala.at(horarioTurma).at( salaTurma1 );
 
                         m_matrizHorarioPorSala.at(horarioTurma).at( salaTurma1 ) = temp;
@@ -383,7 +472,7 @@ Turma* SolucaoSaAlocacaoSala::buscarTurmaPorCodigo(int codigoTurma)
 
 void SolucaoSaAlocacaoSala::incializaSetDeSalas()
 {
-    for( unsigned int i = 0; i < m_listaSala.size(); i++ )
+    for( unsigned int i = 0; i < m_listaSala.size(); ++i )
         m_setSalas.insert( i );
 }
 
@@ -393,7 +482,7 @@ std::set<int>::iterator SolucaoSaAlocacaoSala::getIteratorDoInteiroNoSet(std::se
     if( setEntrada.size() > (unsigned int) posicao ){
         it = setEntrada.begin();
 
-        for( int i = 0; i < posicao; i++ )
+        for( int i = 0; i < posicao; ++i )
             ++it;
     }
 
@@ -488,9 +577,9 @@ long SolucaoSaAlocacaoSala::gerarCusto()
     }
 
     // calcula a diferenca da capacidade por demanda e soma no custo
-    for( unsigned int i = 0; i < m_matrizHorarioPorSala.size(); i++ ){
+    for( unsigned int i = 0; i < m_matrizHorarioPorSala.size(); ++i ){
         std::vector<int>* temp = &m_matrizHorarioPorSala.at(i);
-        for( unsigned int j = 0; j < temp->size(); j++ ){
+        for( unsigned int j = 0; j < temp->size(); ++j ){
             int codTurma = temp->at(j);
             if( codTurma != -1 ){
                 // calcula custo

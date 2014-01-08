@@ -23,7 +23,7 @@ bool ParserSimulatedAnnelingAlocacaoSalaArquivo::parse(const std::string &entrad
 
         m_vetorSala = std::vector<Sala>( qtdeSala );
 
-        for( int i =0; i < qtdeSala; i++ ){
+        for( int i =0; i < qtdeSala; ++i ){
             Sala sala;
             int capacidade;
             std::string descricaoSala;
@@ -40,7 +40,7 @@ bool ParserSimulatedAnnelingAlocacaoSalaArquivo::parse(const std::string &entrad
 
         m_vetorTurma = std::vector<Turma>( qtdeTurma );
 
-        for( int i =0; i < qtdeTurma; i++ ){
+        for( int i =0; i < qtdeTurma; ++i ){
             Turma turma;
             int demanda;
             int horario;

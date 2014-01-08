@@ -31,7 +31,7 @@ bool SimulatedAnnelingAlocacaoSala::carregarDadosEntrada(const std::string &nome
         m_vetorTurma = m_parser->vetorTurma();
 
         m_solucaoSaAlocacaoSalaCompleta.setListaSala( m_vetorSala );
-        for( unsigned int i = 0; i < m_vetorTurma.size(); i++ ){
+        for( unsigned int i = 0; i < m_vetorTurma.size(); ++i ){
             m_solucaoSaAlocacaoSalaCompleta.addTumarNoDia( m_vetorTurma[i], m_vetorTurma[i].diaSemana() );
         }
 
@@ -50,7 +50,7 @@ bool SimulatedAnnelingAlocacaoSala::carregarDadosEntrada(const std::string &nome
 ISolucaoSa *SimulatedAnnelingAlocacaoSala::simulatedAnneling()
 {
     // varrer a SolucaoCompleta gerando um solucaoInicial para cada dia
-    for( int i = SEGUNDA_FEIRA; i <= DOMINGO; i++ ){
+    for( int i = SEGUNDA_FEIRA; i <= DOMINGO; ++i ){
 
         if( m_solucaoSaAlocacaoSalaCompleta.getTurmasDia( (DiaSemana) i ).size() == 0 )
             m_solucaoSaAlocacaoSalaCompleta.addSolucaoNoDia( new SolucaoSaAlocacaoSala(), (DiaSemana) i );
