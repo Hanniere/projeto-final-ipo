@@ -31,14 +31,14 @@ void testeGeraMatrizInicialOk(){
     std::vector< std::vector<int> > matrizHorarioPorSala = sa.matrizHorarioPorSala();
 
     // varre vetor de horarios
-    for( unsigned int i = 0; i < matrizHorarioPorSala.size(); i++ ){
+    for( unsigned int i = 0; i < matrizHorarioPorSala.size(); ++i ){
 
         // todas as linhas tem que ter 10 colunas, 10 salas!
         assert( matrizHorarioPorSala.at(i).size() == 10 );
 
         std::vector<int>* temp = &matrizHorarioPorSala.at(i);
         // todos os elementos do vetor de sala devem ter valor -1
-        for( unsigned int j = 0; j < temp->size(); j++ ){
+        for( unsigned int j = 0; j < temp->size(); ++j ){
             assert( temp->at(j) == -1 );
         }
     }

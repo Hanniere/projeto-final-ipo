@@ -23,7 +23,7 @@ ISolucaoSa *ISimulatedAnneling::simulatedAnneling( ISolucaoSa* solucaoAtual )
 
     while( temperatura > 0.01f ){
         while( numeroIteracoesAtual < m_numeroIteracoes ){
-            numeroIteracoesAtual++;
+            ++numeroIteracoesAtual;
 
             vizinho = solucaoAtual->gerarVizinho();
 
@@ -44,11 +44,11 @@ ISolucaoSa *ISimulatedAnneling::simulatedAnneling( ISolucaoSa* solucaoAtual )
             }
             else {//if( ){
 
-                if( delta != 0 )
+                //if( delta != 0 )
                 {
                     double x = MathUtil::randomEntre0e1();
                     if( x < MathUtil::potenciaBaseNeperianda( -delta/temperatura ) )
-                       solucaoAtual->copia( *vizinho );
+                       melhorSolucao->copia( *vizinho );//solucaoAtual->copia( *vizinho );
                 }
             }
         }

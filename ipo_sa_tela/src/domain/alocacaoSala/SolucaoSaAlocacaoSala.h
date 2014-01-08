@@ -45,6 +45,10 @@ public:
 
     bool gerarVizinhoPorSalaVirtual();
 
+    bool adicionaTurmaDeSalaVirtual();
+
+    bool trocaPorTurmaDeSalaVirtual();
+
     void armazenarMaiorHorarioMatriz();
 
     bool deveGerarVizinhoPelaTroca() const;
