@@ -16,9 +16,6 @@ public:
     int capacidade() const;
     void setCapacidade(int capacidade);
 
-    std::vector<Turma> listaTurma() const;
-    void setListaTurma(const std::vector<Turma> &listaTurma);
-
     std::string descricaoSala() const;
     void setDescricaoSala(const std::string &descricaoSala);
 
@@ -28,9 +25,6 @@ private:
 
     // capacidade da sala
     int m_capacidade;
-
-    // lista de turmas associadas a essa sala
-    std::vector<Turma> m_listaTurma;
 
     std::string m_descricaoSala;
 };

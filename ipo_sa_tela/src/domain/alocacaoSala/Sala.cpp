@@ -1,22 +1,12 @@
 #include "Sala.h"
 
 Sala::Sala()
-    : m_codigoSala( -1 ), m_capacidade( -1 ), m_listaTurma( std::vector<Turma>() )
+    : m_codigoSala( -1 ), m_capacidade( -1 )
 {
 }
 
 Sala::~Sala()
 {
-}
-
-std::vector<Turma> Sala::listaTurma() const
-{
-    return m_listaTurma;
-}
-
-void Sala::setListaTurma(const std::vector<Turma> &listaTurma)
-{
-    m_listaTurma = listaTurma;
 }
 
 int Sala::capacidade() const
