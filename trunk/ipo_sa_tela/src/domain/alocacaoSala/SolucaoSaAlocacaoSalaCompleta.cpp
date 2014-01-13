@@ -41,6 +41,7 @@ void SolucaoSaAlocacaoSalaCompleta::addSolucaoNoDia(ISolucaoSa *solucao, const D
 std::string SolucaoSaAlocacaoSalaCompleta::toString()
 {
     std::ostringstream retorno;
+    float tempoTotal = 0;
     for( unsigned int i = 0; i < m_solucoes.size(); ++i ){
         ISolucaoSa* temp = m_solucoes.at(i);
         if( temp->tempoExecucao() != 0 ){
@@ -49,8 +50,14 @@ std::string SolucaoSaAlocacaoSalaCompleta::toString()
             retorno << std::endl;
             retorno << std::endl;
             retorno << temp->toString();
+
+            tempoTotal += temp->tempoExecucao();
         }
     }
+
+    retorno << "Tempo Total: ";
+    retorno << tempoTotal;
+    retorno << std::endl;
 
     return retorno.str();
 }
