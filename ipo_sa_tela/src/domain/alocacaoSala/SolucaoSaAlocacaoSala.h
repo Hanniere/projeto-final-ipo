@@ -10,7 +10,7 @@
 class SolucaoSaAlocacaoSala : public ISolucaoSa
 {
 public:
-    static const int FATOR_ALUNO_SALA_VIRTUAL = 50;
+    static const int FATOR_ALUNO_SALA_VIRTUAL = 500;
 public:
     SolucaoSaAlocacaoSala();
     virtual ~SolucaoSaAlocacaoSala();
