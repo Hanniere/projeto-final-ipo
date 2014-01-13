@@ -40,3 +40,10 @@ Implementa classe SimulatedAnnealingNova{
     void gerarVizinho( ISolucaoSa* vizinho, const ISolucaoSa* atual ) const;
 }
 
+
+Links
+http://www.cpdee.ufmg.br/defesas/169M.PDF
+
+Lembrete
+- Fazer uma tabela com as salas do ICT no docs.
+- http://dspace.c3sl.ufpr.br/dspace/bitstream/handle/1884/25068/D%20-%20BORGES,%20SUZAN%20KELLY.pdf?sequence=1
