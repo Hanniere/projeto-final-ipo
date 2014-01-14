@@ -1,0 +1,72 @@
+9
+38 110
+40 108
+45 109
+50 101
+50 102
+60 104
+62 103
+80 107
+90 106
+61
+30 0 1 IPO_Chaves
+36 0 1 QG_Fernando
+45 0 1 IAR_Juliana
+50 0 1 MD_Gabriel
+55 1 1 MM_Arlindo
+60 0 1 PP_Vinicius
+60 1 1 AOC_Tiago
+60 0 1 INTRONANO_Passador
+62 0 1 COMPIL_Galvao
+62 0 1 AED_Regina
+80 0 1 FA_Vilhena
+4  0 2 POS_BIO_MOLEC_Claudia
+8  1 2 CN2_Erwin
+18 1 2 COMPIL_Galvao
+22 1 2 MICROBIOL_Elisa
+26 0 2 ONL_Bueno
+29 1 2 CN_Bueno
+32 0 2 BIOMAT_Mariana
+32 1 2 EM_Vanessa
+48 0 2 BD_Daniela
+51 0 2 FIS3_Rossano
+53 0 2 CVV_Elisangela
+78 1 2 LPI_Luisa
+50 0 3 SS_Juliana
+36 0 3 INTROMAT_Quinteiro
+30 0 3 IPO_Chaves
+22 0 3 Prob2_Mirela
+60 0 3 AOC_Tiago
+39 0 3 CTM_Katia
+42 0 3 POOI_Lorena
+37 0 3 CVV_Eudes
+29 0 3 CVV_Elisangela
+18 1 3 IAR_Juliana
+26 1 3 PAA_Juranry
+21 1 3 MD_Gabriel
+58 1 3 AB_Reginaldo
+34 1 3 FEME_Fabiano
+40 0 4 AED_Marcio
+38 0 4 MM_Arlindo
+62 0 4 PP_Vinicius
+41 0 4 TNC_Angelo
+27 0 4 FA_Vilhena
+36 0 4 TG_Maria
+49 0 4 QG_Fernando
+42 1 4 LPI_Luisa
+32 1 4 EM_Vanessa
+18 1 4 CN2_Erwin
+36 0 5 METODOLOGIA_Silvio
+48 0 5 PosBIOTEC_Renato
+34 0 5 CN_Bueno
+14 0 5 FIS3_Rossano
+58 0 5 AB_Reginaldo
+36 0 5 RG_maria
+41 0 5 TNC_Angelo
+29 0 5 BBMF_Luciane
+32 1 5 ONL_Bueno
+42 1 5 POOI_Lorena
+26 1 5 PAA_Jurandy
+28 1 5 PCD_Alvaro
+38 1 5 PI_Cappabianco
+34 1 5 FEMEC_Fabiano
