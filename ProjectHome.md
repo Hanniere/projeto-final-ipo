@@ -1,0 +1,1 @@
+Simulated annealing aplicado ao problema de Alocação de Salas. (Classroom Assignment Problem).
